@@ -9,3 +9,5 @@ export_presets.cfg
 
 # Automatically-generated Mono files
 .mono/
+
+.idea/

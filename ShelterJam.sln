@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShelterJam", "ShelterJam.csproj", "{813F24C9-1306-472E-89F4-0F08A6DA2AEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{813F24C9-1306-472E-89F4-0F08A6DA2AEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{813F24C9-1306-472E-89F4-0F08A6DA2AEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{813F24C9-1306-472E-89F4-0F08A6DA2AEA}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{813F24C9-1306-472E-89F4-0F08A6DA2AEA}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{813F24C9-1306-472E-89F4-0F08A6DA2AEA}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{813F24C9-1306-472E-89F4-0F08A6DA2AEA}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal

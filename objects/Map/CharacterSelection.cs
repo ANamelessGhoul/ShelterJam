@@ -25,7 +25,7 @@ public class CharacterSelection : Node2D
 		{
 			if (_selectedCharacter != null) 
 			{
-				_selectedCharacter.ShowTargets();
+				_selectedCharacter.TogglePatternPreview();
 			}
 		}
     }

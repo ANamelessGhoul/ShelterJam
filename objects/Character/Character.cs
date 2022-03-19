@@ -12,10 +12,14 @@ public class Character : Node2D
 
 	private Sprite _targetSprite;
 
-	private Map _map;
+	private Map _map; 
+
+
+	private Sounds _sounds;
 
 	public override void _Ready()
 	{
+		_sounds = this.GetSingleton<Sounds>();
 		_targetSprite = GetNode<Sprite>("TargetSprite");
 		_map = GetParent<Map>();
 		MapIndex = _map.GetMapIndex(GlobalPosition);
@@ -29,6 +33,7 @@ public class Character : Node2D
 		if (!_map.IsTileWalkable(mapIndex))
 			return false;
 
+		_sounds.PlaySound("Walk");
 		MapIndex = mapIndex;
 		GlobalPosition = _map.GetWorldPosition(MapIndex);
 		return true;

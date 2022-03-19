@@ -4,7 +4,7 @@ using System;
 public class Map : TileMap
 {
 	private GameSpace _gameSpace;
-	public Vector2 WorldOffset => new Vector2(CellSize) / 2;
+	public Vector2 WorldOffset => new Vector2(0, CellSize.y / 2);
 
 
 	public override void _Ready()

@@ -7,7 +7,7 @@ public class GameSpace : Node2D
 
 	public override void _Ready()
 	{
-		Map = GetNode<Map>("TileMap");
+		Map = GetNode<Map>("ObstructionMap");
 		CharacterSelection = GetNode<CharacterSelection>("CharacterSelection");
 	}
 

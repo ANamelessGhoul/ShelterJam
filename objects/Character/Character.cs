@@ -1,40 +1,70 @@
 using Godot;
-using System;
+using Godot.Collections;
 
 public class Character : Node2D
 {
+	[Signal]
+	public delegate void Selected(Character character);
+
+	[Export]
+	private Resource pattern;
+	public Vector2 MapIndex { get; private set; }
+
+	private Sprite _targetSprite;
+
 	private Map _map;
-	private Vector2 _mapIndex;
 
 	public override void _Ready()
 	{
+		_targetSprite = GetNode<Sprite>("TargetSprite");
 		_map = GetParent<Map>();
-		_mapIndex = _map.GetMapIndex(GlobalPosition);
+		MapIndex = _map.GetMapIndex(GlobalPosition);
 	}
 
-	public override void _Process(float delta)
+	public bool TryMoveToMapIndex(Vector2 mapIndex) 
 	{
-		var movement = Vector2.Zero;
-		if (Input.IsActionJustPressed("move_right"))
-			movement = Vector2.Right;
-		if (Input.IsActionJustPressed("move_left"))
-			movement = Vector2.Left;
+		if (mapIndex.DistanceSquaredTo(MapIndex) > 1)
+			return false;
 
+		if (!_map.IsTileWalkable(mapIndex))
+			return false;
 
+		MapIndex = mapIndex;
+		GlobalPosition = _map.GetWorldPosition(MapIndex);
+		return true;
+	}
 
-		if (movement != Vector2.Zero) 
+	public void Select()
+	{
+		EmitSignal(nameof(Selected), this);
+		Modulate = Colors.DarkGray;
+	}
+
+	public void Deselect() 
+	{
+		Modulate = Colors.White;
+	}
+
+	public void ShowTargets() 
+	{
+		var positions = pattern.Get("positions") as Array;
+		var origin = (Vector2) pattern.Get("origin");
+		foreach (Vector2 position in positions) 
 		{
-			var nextMapIndex = _mapIndex + movement;
-			if (_map.IsTileWalkable(nextMapIndex)) 
-			{
-				_mapIndex = nextMapIndex;
-				GlobalPosition = _map.GetWorldPosition(_mapIndex);
-			}
+			var targetPosition = _map.GetWorldPosition(MapIndex + position - origin);
+			var target = _targetSprite.Duplicate() as Sprite;
+			target.Visible = true;
+			AddChild(target);
+			target.GlobalPosition = targetPosition;
 		}
+	}
+
+	public void HideTargets() 
+	{
 	}
 
 	private void _on_Area2D_Clicked() 
 	{
-		GD.Print("Character Clicked!");
+		CallDeferred(nameof(Select));
 	}
 }

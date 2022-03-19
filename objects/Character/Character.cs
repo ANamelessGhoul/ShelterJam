@@ -10,13 +10,13 @@ public class Character : Node2D
 	private Resource pattern;
 	public Vector2 MapIndex { get; private set; }
 
-	private Sprite _targetSprite;
-
 	private Map _map;
+	private PatternPreview _patternPreview;
 
 	public override void _Ready()
 	{
-		_targetSprite = GetNode<Sprite>("TargetSprite");
+		_patternPreview = GetNode<PatternPreview>("PatternPreview");
+
 		_map = GetParent<Map>();
 		MapIndex = _map.GetMapIndex(GlobalPosition);
 	}
@@ -45,22 +45,22 @@ public class Character : Node2D
 		Modulate = Colors.White;
 	}
 
-	public void ShowTargets() 
+	public void TogglePatternPreview()
 	{
-		var positions = pattern.Get("positions") as Array;
-		var origin = (Vector2) pattern.Get("origin");
-		foreach (Vector2 position in positions) 
-		{
-			var targetPosition = _map.GetWorldPosition(MapIndex + position - origin);
-			var target = _targetSprite.Duplicate() as Sprite;
-			target.Visible = true;
-			AddChild(target);
-			target.GlobalPosition = targetPosition;
-		}
+		if (_patternPreview.IsShowing)
+			HidePatternPreview();
+		else
+			ShowPatternPreview();
 	}
 
-	public void HideTargets() 
+	public void ShowPatternPreview() 
 	{
+		_patternPreview.ShowPreview(pattern, _map, MapIndex);
+	}
+
+	public void HidePatternPreview() 
+	{
+		_patternPreview.HidePreview();
 	}
 
 	private void _on_Area2D_Clicked() 

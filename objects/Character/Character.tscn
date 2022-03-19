@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://objects/Character/Character.cs" type="Script" id=1]
 [ext_resource path="res://objects/Character/CharacterInput.cs" type="Script" id=2]
 [ext_resource path="res://sprites/EmptyTile.png" type="Texture" id=3]
 [ext_resource path="res://Pattern.tres" type="Resource" id=4]
+[ext_resource path="res://objects/Character/PatternPreview.cs" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 11.3137, 11.3137 )
@@ -14,16 +15,6 @@ __meta__ = {
 "_edit_group_": true
 }
 pattern = ExtResource( 4 )
-
-[node name="TargetSprite" type="Sprite" parent="."]
-visible = false
-modulate = Color( 0, 0, 0, 1 )
-texture = ExtResource( 3 )
-offset = Vector2( 1, 1 )
-
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 3 )
-offset = Vector2( 1, 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2147483648
@@ -36,7 +27,20 @@ script = ExtResource( 2 )
 rotation = 0.785398
 shape = SubResource( 2 )
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="PatternPreview" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="PatternParent" type="Node2D" parent="PatternPreview"]
+
+[node name="PatternSprite" type="Sprite" parent="PatternPreview"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+texture = ExtResource( 3 )
+offset = Vector2( 1, 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+offset = Vector2( 1, 1 )
 
 [connection signal="Clicked" from="Area2D" to="." method="_on_Area2D_Clicked"]
 [connection signal="input_event" from="Area2D" to="Area2D" method="_on_Area2D_input_event"]

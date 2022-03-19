@@ -8,13 +8,23 @@ public class PatternPreview : Node2D
     private Sprite _targetSprite;
     private Node2D _targetParent;
 
+	private int rotations = 2;
+
     public override void _Ready()
     {
         _targetSprite = GetNode<Sprite>("PatternSprite");
         _targetParent = GetNode<Node2D>("PatternParent");
-    }
 
+	}
 
+	public void RotateClockwise(int quarters) 
+	{
+		rotations += quarters;
+		while (rotations < 0)
+			rotations += 4;
+		rotations %= 4;
+
+	}
 
 	public void ShowPreview(Resource deathPattern, Map map, Vector2 mapIndex)
 	{
@@ -29,7 +39,12 @@ public class PatternPreview : Node2D
 
 		foreach (Vector2 position in positions)
 		{
-			var targetPosition = map.GetWorldPosition(mapIndex + position - origin);
+			var targetOffset = position - origin;
+            for (int i = 0; i < rotations; i++)
+            {
+				targetOffset = new Vector2(-targetOffset.y, targetOffset.x);
+			}
+			var targetPosition = map.GetWorldPosition(mapIndex + targetOffset);
 			var target = _targetSprite.Duplicate() as Sprite;
 			target.Visible = true;
 			_targetParent.AddChild(target);

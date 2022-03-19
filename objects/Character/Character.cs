@@ -10,18 +10,35 @@ public class Character : Node2D
 	private Resource pattern;
 	public Vector2 MapIndex { get; private set; }
 
+	private Sprite _sprite;
 	private Map _map;
 	private PatternPreview _patternPreview;
 
 	public override void _Ready()
 	{
 		_patternPreview = GetNode<PatternPreview>("PatternPreview");
-
+		_sprite = GetNode<Sprite>("Sprite");
 		_map = GetParent<Map>();
 		MapIndex = _map.GetMapIndex(GlobalPosition);
 	}
 
-	public bool TryMoveToMapIndex(Vector2 mapIndex) 
+    public override void _Process(float delta)
+    {
+		if (Input.IsActionJustReleased("rotate_cw"))
+		{
+			_patternPreview.RotateClockwise(1);
+			HidePatternPreview();
+			ShowPatternPreview();
+		}
+		else if (Input.IsActionJustReleased("rotate_ccw")) 
+		{
+			_patternPreview.RotateClockwise(-1);
+			HidePatternPreview();
+			ShowPatternPreview();
+		}
+    }
+
+    public bool TryMoveToMapIndex(Vector2 mapIndex) 
 	{
 		if (mapIndex.DistanceSquaredTo(MapIndex) > 1)
 			return false;
@@ -37,12 +54,13 @@ public class Character : Node2D
 	public void Select()
 	{
 		EmitSignal(nameof(Selected), this);
-		Modulate = Colors.DarkGray;
+		_sprite.SelfModulate = Colors.DarkGray;
 	}
 
 	public void Deselect() 
 	{
-		Modulate = Colors.White;
+		_sprite.SelfModulate = Colors.White;
+		HidePatternPreview();
 	}
 
 	public void TogglePatternPreview()

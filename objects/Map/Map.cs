@@ -1,11 +1,16 @@
 using Godot;
-using System;
+using System.Collections.Generic;
 
 public class Map : TileMap
 {
 	private GameSpace _gameSpace;
 	public Vector2 WorldOffset => new Vector2(0, CellSize.y / 2);
 
+	public void SetTiles(List<Vector2> positions, int tileId)
+	{
+		foreach (Vector2 position in positions)
+			SetCellv(position, tileId);
+	}
 
 	public override void _Ready()
 	{
@@ -25,8 +30,8 @@ public class Map : TileMap
 	public bool IsTileWalkable(Vector2 mapIndex) 
 	{
 		// TODO: Update at every turn instead of each query
-		var usedCells = GetUsedCells();
+		var wallCells = GetUsedCellsById(0);
 		
-		return !usedCells.Contains(mapIndex);
+		return !wallCells.Contains(mapIndex);
 	}
 }

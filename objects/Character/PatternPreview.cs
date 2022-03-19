@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using System.Collections.Generic;
 
 public class PatternPreview : Node2D
 {
@@ -34,17 +35,11 @@ public class PatternPreview : Node2D
 			return;
 		}
 
-		var positions = deathPattern.Get("positions") as Array;
-		var origin = (Vector2)deathPattern.Get("origin");
+        var rotatedPositons = GetRotatedMapIndexes(deathPattern, mapIndex);
 
-		foreach (Vector2 position in positions)
+        foreach (Vector2 position in rotatedPositons)
 		{
-			var targetOffset = position - origin;
-            for (int i = 0; i < rotations; i++)
-            {
-				targetOffset = new Vector2(-targetOffset.y, targetOffset.x);
-			}
-			var targetPosition = map.GetWorldPosition(mapIndex + targetOffset);
+			var targetPosition = map.GetWorldPosition(position);
 			var target = _targetSprite.Duplicate() as Sprite;
 			target.Visible = true;
 			_targetParent.AddChild(target);
@@ -54,7 +49,24 @@ public class PatternPreview : Node2D
 		IsShowing = true;
 	}
 
-	public void HidePreview()
+    public List<Vector2> GetRotatedMapIndexes(Resource deathPattern, Vector2 characterIndex)
+    {
+		var rotatedPositions = new List<Vector2>();
+        var positions = deathPattern.Get("positions") as Array;
+		var origin = (Vector2)deathPattern.Get("origin");
+
+		foreach (Vector2 position in positions)
+		{
+			var targetOffset = position - origin;
+			for (int i = 0; i < rotations; i++)
+				targetOffset = new Vector2(-targetOffset.y, targetOffset.x);
+			rotatedPositions.Add(targetOffset + characterIndex);
+		}
+
+		return rotatedPositions;
+	}
+
+    public void HidePreview()
 	{
 		foreach (Node2D child in _targetParent.GetChildren()) 
 		{

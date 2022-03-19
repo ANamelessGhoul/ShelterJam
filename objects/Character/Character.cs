@@ -1,5 +1,5 @@
 using Godot;
-using Godot.Collections;
+using System.Collections.Generic;
 
 public class Character : Node2D
 {
@@ -9,6 +9,8 @@ public class Character : Node2D
 	[Export]
 	private Resource pattern;
 	public Vector2 MapIndex { get; private set; }
+	public int SkillId { get; private set; }
+	public bool IsShowingSkillPreview => _patternPreview.IsShowing;
 
 	private Sprite _sprite;
 	private Sounds _sounds;
@@ -39,6 +41,12 @@ public class Character : Node2D
 			ShowPatternPreview();
 		}
     }
+
+	public List<Vector2> GetRotatedIndexes()
+    {
+        List<Vector2> indexes = _patternPreview.GetRotatedMapIndexes(pattern, MapIndex);
+		return indexes;
+	}
 
     public bool TryMoveToMapIndex(Vector2 mapIndex) 
 	{

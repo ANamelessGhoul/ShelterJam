@@ -45,6 +45,6 @@ public class SceneManager : Node2D
 
 	public void LoadNextLevel() 
 	{
-		LoadLevel(levelIndex);
+		LoadLevel(levelIndex + 1);
 	}
 }

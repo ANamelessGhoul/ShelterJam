@@ -3,6 +3,10 @@ using System;
 
 public class EnergyHandler : Node
 {
+
+    [Signal]
+    public delegate void EnergyChanged(int energy);
+
     [Export]
     public int Energy { get; private set; }
 
@@ -12,11 +16,13 @@ public class EnergyHandler : Node
     public override void _Ready()
     {
         _gameManager= this.GetSingleton<GameManager>();
+        EmitSignal("EnergyChanged", Energy);
     }
 
     public void SpendEnergy(int skillCost)
     {
         Energy -= skillCost;
+        EmitSignal("EnergyChanged", Energy);
         GD.Print("Energy Left: " + Energy);
         Energy = Math.Max(Energy, 0); // clamp
 

@@ -73,13 +73,14 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="PowerUpMap" type="TileMap" parent="."]
+[node name="SpeedupMap" type="TileMap" parent="."]
 mode = 1
 tile_set = SubResource( 2 )
 cell_size = Vector2( 28, 14 )
 cell_custom_transform = Transform2D( 28, 0, 0, 14, 0, 0 )
 cell_tile_origin = 1
 format = 1
+script = ExtResource( 4 )
 __meta__ = {
 "_editor_description_": ""
 }

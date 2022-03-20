@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public class CharacterSelection : Node2D
 {
@@ -47,7 +46,14 @@ public class CharacterSelection : Node2D
 		if (_selectedCharacter == null)
 			return;
 
-		var mapIndex = _gameSpace.Map.WorldToMap(GetGlobalMousePosition());
+		if (_selectedCharacter.IsShowingSkillPreview)
+		{
+			var positionsToApplySkill = _selectedCharacter.GetRotatedIndexes();
+			_gameSpace.SpeedupMap.SetTiles(positionsToApplySkill, _selectedCharacter.SkillId);
+			return;
+		}
+
+		var mapIndex = _gameSpace.ObstructionMap.WorldToMap(GetGlobalMousePosition());
 		if (mapIndex == _selectedCharacter.MapIndex)
 			return;
 

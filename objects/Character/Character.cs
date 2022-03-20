@@ -1,5 +1,5 @@
 using Godot;
-using Godot.Collections;
+using System.Collections.Generic;
 
 public class Character : Node2D
 {
@@ -9,13 +9,17 @@ public class Character : Node2D
 	[Export]
 	private Resource pattern;
 	public Vector2 MapIndex { get; private set; }
+	public int SkillId { get; private set; }
+	public bool IsShowingSkillPreview => _patternPreview.IsShowing;
 
 	private Sprite _sprite;
+	private Sounds _sounds;
 	private Map _map;
 	private PatternPreview _patternPreview;
 
 	public override void _Ready()
 	{
+		_sounds = this.GetSingleton<Sounds>();
 		_patternPreview = GetNode<PatternPreview>("PatternPreview");
 		_sprite = GetNode<Sprite>("Sprite");
 		_map = GetParent<Map>();
@@ -38,6 +42,12 @@ public class Character : Node2D
 		}
     }
 
+	public List<Vector2> GetRotatedIndexes()
+    {
+        List<Vector2> indexes = _patternPreview.GetRotatedMapIndexes(pattern, MapIndex);
+		return indexes;
+	}
+
     public bool TryMoveToMapIndex(Vector2 mapIndex) 
 	{
 		if (mapIndex.DistanceSquaredTo(MapIndex) > 1)
@@ -46,6 +56,7 @@ public class Character : Node2D
 		if (!_map.IsTileWalkable(mapIndex))
 			return false;
 
+		_sounds.PlaySound("Walk");
 		MapIndex = mapIndex;
 		GlobalPosition = _map.GetWorldPosition(MapIndex);
 		return true;

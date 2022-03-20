@@ -27,6 +27,7 @@ config/icon="res://icon.png"
 [autoload]
 
 GameManager="*res://scripts/GameManager.cs"
+Sounds="*res://sounds/Sounds.tscn"
 
 [display]
 

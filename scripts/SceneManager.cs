@@ -11,6 +11,7 @@ public class SceneManager : Node2D
     {
         PackedScene x = (PackedScene)GD.Load($"res://scenes/Level1.tscn");
         activeLevel = x.Instance<GameSpace>();
+        activeLevel.Connect("LevelWon", this, nameof(LoadNextLevel));
         AddChild(activeLevel);
     }
 
@@ -38,6 +39,12 @@ public class SceneManager : Node2D
         activeLevel.QueueFree();
         PackedScene x = (PackedScene)GD.Load($"res://scenes/Level{level}.tscn");
         activeLevel = x.Instance<GameSpace>();
+        activeLevel.Connect("LevelWon", this, nameof(LoadNextLevel));
         AddChild(activeLevel);
+    }
+
+    public void LoadNextLevel() 
+    {
+        LoadLevel(levelIndex);
     }
 }

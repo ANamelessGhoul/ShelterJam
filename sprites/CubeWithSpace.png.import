@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pixel.png-9ba42fb3acbac2c3926b19b63c3183c6.stex"
+path="res://.import/CubeWithSpace.png-8ace3f56a871b3d06f0bb1f065eb588b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/pixel.png"
-dest_files=[ "res://.import/pixel.png-9ba42fb3acbac2c3926b19b63c3183c6.stex" ]
+source_file="res://sprites/CubeWithSpace.png"
+dest_files=[ "res://.import/CubeWithSpace.png-8ace3f56a871b3d06f0bb1f065eb588b.stex" ]
 
 [params]
 

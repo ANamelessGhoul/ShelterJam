@@ -27,7 +27,7 @@ public class CharacterSelection : Node2D
 		}
 		else if (Input.IsActionJustPressed("use_skill")) 
 		{
-			if (_selectedCharacter != null) 
+			if (_selectedCharacter != null && IsInstanceValid(_selectedCharacter)) 
 			{
 				_selectedCharacter.TogglePatternPreview();
 			}

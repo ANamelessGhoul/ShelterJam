@@ -1,23 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://objects/Character/Character.cs" type="Script" id=1]
 [ext_resource path="res://objects/Character/CharacterInput.cs" type="Script" id=2]
 [ext_resource path="res://sprites/WhiteTile.png" type="Texture" id=3]
 [ext_resource path="res://Pattern.tres" type="Resource" id=4]
 [ext_resource path="res://objects/Character/PatternPreview.cs" type="Script" id=5]
-[ext_resource path="res://sprites/Pawn.png" type="Texture" id=6]
-[ext_resource path="res://shaders/OutlineShader.tres" type="Shader" id=7]
+[ext_resource path="res://sprites/Character/sprite1.png" type="Texture" id=6]
+[ext_resource path="res://shaders/OutlineMaterial.tres" type="Material" id=7]
 [ext_resource path="res://objects/Character/WalkHighlights.cs" type="Script" id=8]
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 7 )
-shader_param/intensity = 50
-shader_param/precision = 0.02
-shader_param/flipColors = null
-shader_param/outline_color = Color( 1, 1, 1, 1 )
-shader_param/outline_color_2 = Color( 1, 1, 1, 1 )
-shader_param/use_outline_uv = null
-shader_param/useTexture = null
 
 [node name="Character" type="Node2D"]
 script = ExtResource( 1 )
@@ -53,16 +43,11 @@ texture = ExtResource( 3 )
 offset = Vector2( 1, 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 7 )
 position = Vector2( 0, -7 )
 texture = ExtResource( 6 )
 offset = Vector2( 1, 2.5 )
-
-[node name="Outline" type="Sprite" parent="Sprite"]
-visible = false
-material = SubResource( 1 )
-z_index = -1
-texture = ExtResource( 6 )
-offset = Vector2( 1, 2.5 )
+region_rect = Rect2( 0, 0, 27, 27 )
 
 [node name="WalkHighlights" type="Node2D" parent="."]
 z_index = 1

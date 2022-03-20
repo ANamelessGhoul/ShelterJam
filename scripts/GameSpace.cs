@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public class GameSpace : Node2D
 {
+    internal Vector2 flagIndex;
 
-
-	public CharacterSelection CharacterSelection { get; private set; }
+    public CharacterSelection CharacterSelection { get; private set; }
 	public ObstructionMap ObstructionMap { get; private set; }
 	public SkillMap SpeedupMap { get; private set; }
 	public Map VisualMap { get; private set; }

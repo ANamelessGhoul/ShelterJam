@@ -39,8 +39,10 @@ public class Character : Node2D
 		_patternPreview = GetNode<PatternPreview>("PatternPreview");
 		_walkHighlights = GetNode<WalkHighlights>("WalkHighlights");
 		_sprite = GetNode<Sprite>("Sprite");
-		_outline = GetNode<Sprite>("Sprite/Outline");
+		//_outline = GetNode<Sprite>("Sprite/Outline");
 		_gameSpace = GetNode<GameSpace>("../..");
+
+		_sprite.Material = (Material)_sprite.Material.Duplicate();
 
 		CallDeferred(nameof(GetMapIndex));
 	}
@@ -127,18 +129,18 @@ public class Character : Node2D
     public void Select()
 	{
 		EmitSignal(nameof(Selected), this);
-		_sprite.SelfModulate = Colors.DarkGray;
-		_outline.Visible = true;
+		(_sprite.Material as ShaderMaterial).SetShaderParam("intensity", 50);
+		//_outline.Visible = true;
 		_isSelected = true;
 		ShowWalkHighlights();
 	}
 
 	public void Deselect() 
 	{
-		_sprite.SelfModulate = Colors.White;
 		HidePatternPreview();
-		_isSelected = false;
-		_outline.Visible = false;
+        _isSelected = false;
+		(_sprite.Material as ShaderMaterial).SetShaderParam("intensity", 0);
+		//_outline.Visible = false;
 		HideWalkHighlights();
 	}
 

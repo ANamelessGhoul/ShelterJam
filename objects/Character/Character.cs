@@ -8,7 +8,7 @@ public class Character : Node2D
 	public delegate void Selected(Character character);
 
 	[Export]
-	private Resource pattern;
+	private Resource pattern = null;
 	[Export]
 	public int SkillEnergyCost;
 	public Vector2 MapIndex { get; private set; }
@@ -23,16 +23,24 @@ public class Character : Node2D
 	private Map _map;  // Any map
 	private GameSpace _gameSpace;
 	private PatternPreview _patternPreview;
+	private WalkHighlights _walkHighlights;
+
+	private readonly Vector2[] directions = new[]
+	{
+		Vector2.Up,
+		Vector2.Right,
+		Vector2.Down,
+		Vector2.Left,
+	};
 
 	public override void _Ready()
 	{
 		_sounds = this.GetSingleton<Sounds>();
 		_patternPreview = GetNode<PatternPreview>("PatternPreview");
+		_walkHighlights = GetNode<WalkHighlights>("WalkHighlights");
 		_sprite = GetNode<Sprite>("Sprite");
 		_outline = GetNode<Sprite>("Sprite/Outline");
 		_gameSpace = GetNode<GameSpace>("../..");
-
-		//_sprite.ZIndex = (int)Position.y;
 
 		CallDeferred(nameof(GetMapIndex));
 	}
@@ -81,22 +89,24 @@ public class Character : Node2D
 
     public bool TryMoveToMapIndex(Vector2 targetMapIndex) 
 	{
+		if (!CanMoveToMapIndex(targetMapIndex))
+			return false;
+
+		// Move
+		_sounds.PlaySound("Walk");
+		MapIndex = targetMapIndex;
+		GlobalPosition = _map.GetWorldPosition(MapIndex);
+		return true;
+	}
+
+	public bool CanMoveToMapIndex(Vector2 targetMapIndex) 
+	{
 		if (targetMapIndex.DistanceSquaredTo(MapIndex) > 1)
 			return false;
 
 		if (_gameSpace.ObstructionMap.TileExistsAt(targetMapIndex))
 			return false;
 
-		if (!_gameSpace.SpeedupMap.TileExistsAt(targetMapIndex))
-        {
-
-        }
-
-		// Move
-		_sounds.PlaySound("Walk");
-		MapIndex = targetMapIndex;
-		GlobalPosition = _map.GetWorldPosition(MapIndex);
-		//_sprite.ZIndex = (int)Position.y;
 		return true;
 	}
 
@@ -106,6 +116,7 @@ public class Character : Node2D
 		_sprite.SelfModulate = Colors.DarkGray;
 		_outline.Visible = true;
 		_isSelected = true;
+		ShowWalkHighlights();
 	}
 
 	public void Deselect() 
@@ -114,20 +125,44 @@ public class Character : Node2D
 		HidePatternPreview();
 		_isSelected = false;
 		_outline.Visible = false;
+		HideWalkHighlights();
+	}
 
+	public void ShowWalkHighlights() 
+	{
+		var availableDirections = new bool[4];
+        for (int i = 0; i < directions.Length; i++)
+        {
+            var target = directions[i] + MapIndex;
+			availableDirections[i] = CanMoveToMapIndex(target);
+			
+        }
+
+		_walkHighlights.ShowSides(availableDirections);
+	}
+
+	public void HideWalkHighlights()
+	{
+		_walkHighlights.HideSides();
 	}
 
 	public void TogglePatternPreview()
 	{
 		if (_patternPreview.IsShowing)
+		{
 			HidePatternPreview();
-		else
+			ShowWalkHighlights();
+		}
+		else 
+		{
 			ShowPatternPreview();
+			HideWalkHighlights();
+		}
 	}
 
 	public void ShowPatternPreview() 
 	{
-		_patternPreview.ShowPreview(pattern, _map, MapIndex);
+		_patternPreview.ShowPreview(pattern, (ObstructionMap)_gameSpace.ObstructionMap, MapIndex);
 	}
 
 	public void HidePatternPreview() 

@@ -87,6 +87,9 @@ public class Character : Node2D
 		if (_gameSpace.ObstructionMap.TileExistsAt(targetMapIndex))
 			return false;
 
+		if (_gameSpace.CheckIfOverlappingWithCharacters(targetMapIndex))
+			return false;
+
 		if (!_gameSpace.SpeedupMap.TileExistsAt(targetMapIndex))
         {
 
@@ -100,7 +103,22 @@ public class Character : Node2D
 		return true;
 	}
 
-	public void Select()
+	public bool CanThisCharacterMoveToPosition(Vector2 targetMapIndex)
+	{
+
+		if (_gameSpace.ObstructionMap.TileExistsAt(targetMapIndex))
+			return false;
+
+		if (!_gameSpace.SpeedupMap.TileExistsAt(targetMapIndex) && _gameSpace.EnergyHandler.Energy == 0)
+			return false;
+
+		if (_gameSpace.CheckIfOverlappingWithCharacters(targetMapIndex))
+			return false;
+		
+		return true;
+	}
+
+    public void Select()
 	{
 		EmitSignal(nameof(Selected), this);
 		_sprite.SelfModulate = Colors.DarkGray;

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class GameSpace : Node2D
 {
@@ -24,6 +25,29 @@ public class GameSpace : Node2D
 	public void SpendEnergy(int skillCost)
 	{
 		EnergyHandler.SpendEnergy(skillCost);
+	}
+
+
+	public bool CheckIfOverlappingWithCharacters(Vector2 position)
+	{
+		foreach (Character character in GetAllCharacters())
+		{
+			if (position == character.MapIndex)
+				return true;
+		}
+
+		return false;
+	}
+
+	public List<Character> GetAllCharacters()
+    {
+		List<Character> characters = new List<Character>();
+		foreach (var nodeChild in ObstructionMap.GetChildren())
+        {
+			if (nodeChild is Character character)
+				characters.Add(character);
+        }
+		return characters;
 	}
 
 }

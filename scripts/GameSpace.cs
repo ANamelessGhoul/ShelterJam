@@ -7,9 +7,9 @@ public class GameSpace : Node2D
 	[Signal]
 	public delegate void LevelWon();
 
-    public Vector2 flagIndex;
+	public Vector2 flagIndex;
 
-    public CharacterSelection CharacterSelection { get; private set; }
+	public CharacterSelection CharacterSelection { get; private set; }
 	public ObstructionMap ObstructionMap { get; private set; }
 	public SkillMap SpeedupMap { get; private set; }
 	public Map VisualMap { get; private set; }
@@ -43,24 +43,24 @@ public class GameSpace : Node2D
 	}
 
 	public List<Character> GetAllCharacters()
-    {
+	{
 		List<Character> characters = new List<Character>();
 		foreach (var nodeChild in ObstructionMap.GetChildren())
-        {
+		{
 			if (!IsInstanceValid((Godot.Object)nodeChild))
 				continue;
 
 			if (nodeChild is Character character)
 				characters.Add(character);
-        }
+		}
 		return characters;
 	}
 
-    public void PlayerMovedTo(Vector2 mapIndex)
-    {
+	public void PlayerMovedTo(Vector2 mapIndex)
+	{
 		if (mapIndex == flagIndex) 
 		{
 			EmitSignal("LevelWon");
 		}
-    }
+	}
 }

@@ -133,18 +133,23 @@ script = ExtResource( 8 )
 
 [node name="Character" parent="ObstructionMap" instance=ExtResource( 3 )]
 position = Vector2( 252, 105 )
+SkillEnergyCost = 0
 
 [node name="Character2" parent="ObstructionMap" instance=ExtResource( 3 )]
 position = Vector2( 224, 105 )
+SkillEnergyCost = 0
 
 [node name="Character3" parent="ObstructionMap" instance=ExtResource( 3 )]
 position = Vector2( 280, 105 )
+SkillEnergyCost = 0
 
 [node name="Character4" parent="ObstructionMap" instance=ExtResource( 3 )]
 position = Vector2( 308, 105 )
+SkillEnergyCost = 0
 
 [node name="Character5" parent="ObstructionMap" instance=ExtResource( 3 )]
 position = Vector2( 196, 105 )
+SkillEnergyCost = 0
 
 [node name="Flag" parent="ObstructionMap" instance=ExtResource( 10 )]
 offset = Vector2( 0, -7 )

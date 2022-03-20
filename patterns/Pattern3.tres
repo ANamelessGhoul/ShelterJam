@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://scripts/DeathPattern.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+positions = [ Vector2( 0, -1 ), Vector2( 1, -1 ), Vector2( 2, -1 ), Vector2( 0, 0 ), Vector2( 2, 0 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 2, 1 ), Vector2( 1, 0 ) ]
+origin = Vector2( 1, 0 )

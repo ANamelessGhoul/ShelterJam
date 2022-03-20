@@ -13,15 +13,15 @@ public class CharacterSelection : Node2D
 		_sounds = this.GetSingleton<Sounds>();
 	}
 
-    public override void _UnhandledInput(InputEvent @event)
-    {
+	public override void _UnhandledInput(InputEvent @event)
+	{
 		if (Input.IsActionJustPressed("click"))
 		{
 			OnClick();
 		}
 	}
-    public override void _Process(float delta)
-    {
+	public override void _Process(float delta)
+	{
 
 		if (Input.IsActionJustPressed("cancel_select"))
 		{
@@ -37,7 +37,7 @@ public class CharacterSelection : Node2D
 				_selectedCharacter.TogglePatternPreview();
 			}
 		}
-    }
+	}
 	public void SelectCharacter(Character character)
 	{
 		DeselectCharacter();
@@ -67,7 +67,7 @@ public class CharacterSelection : Node2D
 
 		if (_selectedCharacter.IsShowingSkillPreview)
 		{
-            int skillEnergyCost = _selectedCharacter.SkillEnergyCost;
+			int skillEnergyCost = _selectedCharacter.SkillEnergyCost;
 			if (skillEnergyCost > _gameSpace.EnergyHandler.Energy) 
 			{
 				_sounds.PlaySound("CastingSpellFailed");
@@ -77,14 +77,14 @@ public class CharacterSelection : Node2D
 			// Apply Cast
 			var positionsToApplySkill = _selectedCharacter.GetRotatedIndexes();
 			var isOverlappingWithWall = false;
-            foreach (var position in positionsToApplySkill)
-            {
+			foreach (var position in positionsToApplySkill)
+			{
 				if (_gameSpace.ObstructionMap.TileExistsAt(position)) 
 				{
 					isOverlappingWithWall = true;
 					break;
 				}
-            }
+			}
 
 
 			if (!isOverlappingWithWall) 
@@ -95,8 +95,8 @@ public class CharacterSelection : Node2D
 				_gameSpace.SpeedupMap.SetTiles(positionsToApplySkill, _selectedCharacter.SkillId);
 				_selectedCharacter.DieOnSkillCast();
 			}
-            else
-            {
+			else
+			{
 				_sounds.PlaySound("CastingSpellFailed");
 			}
 			return;
@@ -126,7 +126,7 @@ public class CharacterSelection : Node2D
 
 	}
 
-    public void _on_Character_Selected(Character character) 
+	public void _on_Character_Selected(Character character) 
 	{
 		SelectCharacter(character);
 	}

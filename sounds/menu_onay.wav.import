@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/menu_onay.wav-86546d3f42394bd364f69f840b0d7c78.sample"
+
+[deps]
+
+source_file="res://sounds/menu_onay.wav"
+dest_files=[ "res://.import/menu_onay.wav-86546d3f42394bd364f69f840b0d7c78.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

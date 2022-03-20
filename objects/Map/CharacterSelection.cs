@@ -3,12 +3,14 @@ using System;
 
 public class CharacterSelection : Node2D
 {
+	private Sounds _sounds;
 	private GameSpace _gameSpace;
 	private Character _selectedCharacter = null;
 
 	public override void _Ready() 
 	{
 		_gameSpace = GetParent<GameSpace>();
+		_sounds = this.GetSingleton<Sounds>();
 	}
 
     public override void _UnhandledInput(InputEvent @event)
@@ -23,10 +25,13 @@ public class CharacterSelection : Node2D
 
 		if (Input.IsActionJustPressed("cancel_select"))
 		{
+			_sounds.StopPlaying("Elinde_Ates_Var");
 			DeselectCharacter();
 		}
 		else if (Input.IsActionJustPressed("use_skill")) 
 		{
+			_sounds.PlaySound("RotateIndicator");
+			_sounds.StartPlaying("Elinde_Ates_Var");
 			if (_selectedCharacter != null && IsInstanceValid(_selectedCharacter)) 
 			{
 				_selectedCharacter.TogglePatternPreview();
@@ -37,6 +42,7 @@ public class CharacterSelection : Node2D
 	{
 		DeselectCharacter();
 		_selectedCharacter = character;
+		_sounds.PlaySound("PawnSelect");
 	}
 
 	public void DeselectCharacter()
@@ -64,9 +70,10 @@ public class CharacterSelection : Node2D
             int skillEnergyCost = _selectedCharacter.SkillEnergyCost;
 			if (skillEnergyCost > _gameSpace.EnergyHandler.Energy) 
 			{
-				GD.Print("Not enough energy to cast");
+				_sounds.PlaySound("CastingSpellFailed");
 				return;
 			}
+
 			// Apply Cast
 			var positionsToApplySkill = _selectedCharacter.GetRotatedIndexes();
 			var isOverlappingWithWall = false;
@@ -79,11 +86,18 @@ public class CharacterSelection : Node2D
 				}
             }
 
+
 			if (!isOverlappingWithWall) 
 			{
+				// Cast the skill, actually
+				_sounds.PlaySound("CastSpell");
 				_gameSpace.SpendEnergy(skillEnergyCost);
 				_gameSpace.SpeedupMap.SetTiles(positionsToApplySkill, _selectedCharacter.SkillId);
 				_selectedCharacter.DieOnSkillCast();
+			}
+            else
+            {
+				_sounds.PlaySound("CastingSpellFailed");
 			}
 			return;
 
@@ -92,8 +106,6 @@ public class CharacterSelection : Node2D
 		var mapIndex = _gameSpace.ObstructionMap.WorldToMap(GetGlobalMousePosition());
 		if (mapIndex == _selectedCharacter.MapIndex)
 			return;
-
-
 
 		var moveEnergyCost = _gameSpace.SpeedupMap.TileExistsAt(_selectedCharacter.MapIndex) ? 0 : 1;
 		var outOfEnergy = moveEnergyCost > _gameSpace.EnergyHandler.Energy;
@@ -112,5 +124,6 @@ public class CharacterSelection : Node2D
 	{
 		SelectCharacter(character);
 	}
+
 
 }

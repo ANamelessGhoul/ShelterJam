@@ -1,24 +1,43 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://sounds/Walk.wav" type="AudioStream" id=1]
-[ext_resource path="res://sounds/SpeedUpAura.wav" type="AudioStream" id=2]
-[ext_resource path="res://sounds/Die.wav" type="AudioStream" id=3]
-[ext_resource path="res://sounds/JumpAura.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/step.wav" type="AudioStream" id=1]
+[ext_resource path="res://sounds/yetenek_kullan.wav" type="AudioStream" id=2]
+[ext_resource path="res://sounds/menu_onay.wav" type="AudioStream" id=3]
+[ext_resource path="res://sounds/menu_ret.wav" type="AudioStream" id=4]
 [ext_resource path="res://sounds/Sounds.cs" type="Script" id=5]
+[ext_resource path="res://sounds/step_heavy.wav" type="AudioStream" id=6]
+[ext_resource path="res://sounds/yetenek_gecersiz.wav" type="AudioStream" id=7]
+[ext_resource path="res://sounds/piyon_sec.wav" type="AudioStream" id=8]
+[ext_resource path="res://sounds/rotate.wav" type="AudioStream" id=9]
+[ext_resource path="res://sounds/Elinde_Ates_Var.wav" type="AudioStream" id=10]
 
 [node name="Node" type="Node"]
 script = ExtResource( 5 )
 
 [node name="Walk" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="WalkSpedUp" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 
-[node name="Die" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-
-[node name="DeathTrailSpeed" type="AudioStreamPlayer" parent="."]
+[node name="CastSpell" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 
-[node name="DeathTrailJump" type="AudioStreamPlayer" parent="."]
+[node name="CastingSpellFailed" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[node name="MenuAccept" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="MenuReject" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 
-[node name="CastingIndicatorHold" type="AudioStreamPlayer" parent="."]
+[node name="RotateIndicator" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
+[node name="PawnSelect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[node name="Elinde_Ates_Var" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -11.647

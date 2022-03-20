@@ -105,14 +105,23 @@ public class Character : Node2D
 
 	public bool CanThisCharacterMoveToPosition(Vector2 targetMapIndex)
 	{
+		// Location blocked cheks
+		if (targetMapIndex.DistanceSquaredTo(MapIndex) > 1)
+			return false;
 
 		if (_gameSpace.ObstructionMap.TileExistsAt(targetMapIndex))
 			return false;
 
-		if (!_gameSpace.SpeedupMap.TileExistsAt(targetMapIndex) && _gameSpace.EnergyHandler.Energy == 0)
+		if (_gameSpace.CheckIfOverlappingWithCharacters(targetMapIndex))
 			return false;
 
-		if (_gameSpace.CheckIfOverlappingWithCharacters(targetMapIndex))
+		// Energy checks
+		if (_gameSpace.SpeedupMap.TileExistsAt(MapIndex))
+        {
+			return true;
+        }
+
+		if (_gameSpace.EnergyHandler.Energy == 0)
 			return false;
 		
 		return true;

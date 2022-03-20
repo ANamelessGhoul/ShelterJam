@@ -14,7 +14,8 @@ public class Character : Node2D
 
 	private Sprite _sprite;
 	private Sounds _sounds;
-	private Map _map;
+	private Map _map;  // Any map
+	private GameSpace _gameSpace;
 	private PatternPreview _patternPreview;
 
 	public override void _Ready()
@@ -22,7 +23,9 @@ public class Character : Node2D
 		_sounds = this.GetSingleton<Sounds>();
 		_patternPreview = GetNode<PatternPreview>("PatternPreview");
 		_sprite = GetNode<Sprite>("Sprite");
-		_map = GetParent<Map>();
+		_gameSpace = GetParent<GameSpace>();
+		_map = _gameSpace.VisualMap;
+		GD.Print(_gameSpace);
 		MapIndex = _map.GetMapIndex(GlobalPosition);
 	}
 
@@ -48,16 +51,22 @@ public class Character : Node2D
 		return indexes;
 	}
 
-    public bool TryMoveToMapIndex(Vector2 mapIndex) 
+    public bool TryMoveToMapIndex(Vector2 targetMapIndex) 
 	{
-		if (mapIndex.DistanceSquaredTo(MapIndex) > 1)
+		if (targetMapIndex.DistanceSquaredTo(MapIndex) > 1)
 			return false;
 
-		if (!_map.IsTileWalkable(mapIndex))
+		if (!_gameSpace.ObstructionMap.IsTileWalkable(targetMapIndex))
 			return false;
 
+		if (_gameSpace.SpeedupMap.IsTileWalkable(targetMapIndex))
+        {
+
+        }
+
+		// Move
 		_sounds.PlaySound("Walk");
-		MapIndex = mapIndex;
+		MapIndex = targetMapIndex;
 		GlobalPosition = _map.GetWorldPosition(MapIndex);
 		return true;
 	}

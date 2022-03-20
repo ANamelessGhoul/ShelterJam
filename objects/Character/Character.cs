@@ -47,14 +47,14 @@ public class Character : Node2D
 		CallDeferred(nameof(GetMapIndex));
 	}
 
-    private void GetMapIndex()
+	private void GetMapIndex()
 	{
 		_map = _gameSpace.VisualMap;
 		MapIndex = _map.GetMapIndex(GlobalPosition);
 	}
 
-    public override void _Process(float delta)
-    {
+	public override void _Process(float delta)
+	{
 		if (_isSelected)
 			ProcessSkillRotation();
 
@@ -81,7 +81,7 @@ public class Character : Node2D
 	}
 
 	public void DieOnSkillCast()
-    {
+	{
 		var death = GetNode("Death") as Node2D;
 		var deathAnimation = death.GetNode("AnimatedSprite") as AnimatedSprite;
 		deathAnimation.Playing = true;
@@ -94,13 +94,13 @@ public class Character : Node2D
 		QueueFree();
 	}
 
-    public List<Vector2> GetRotatedIndexes()
-    {
-        List<Vector2> indexes = _patternPreview.GetRotatedMapIndexes(pattern, MapIndex);
+	public List<Vector2> GetRotatedIndexes()
+	{
+		List<Vector2> indexes = _patternPreview.GetRotatedMapIndexes(pattern, MapIndex);
 		return indexes;
 	}
 
-    public bool TryMoveToMapIndex(Vector2 targetMapIndex) 
+	public bool TryMoveToMapIndex(Vector2 targetMapIndex) 
 	{
 		if (!CanMoveToMapIndex(targetMapIndex))
 			return false;
@@ -108,7 +108,7 @@ public class Character : Node2D
 		// Move
 		if (_gameSpace.SpeedupMap.TileExistsAt(targetMapIndex))
 			_sounds.PlaySound("WalkSpedUp");
-        else
+		else
 			_sounds.PlaySound("Walk");
 
 		MapIndex = targetMapIndex;
@@ -130,9 +130,9 @@ public class Character : Node2D
 
 		// Energy checks
 		if (_gameSpace.SpeedupMap.TileExistsAt(MapIndex))
-        {
+		{
 			return true;
-        }
+		}
 
 		if (_gameSpace.EnergyHandler.Energy == 0)
 			return false;
@@ -141,7 +141,7 @@ public class Character : Node2D
 		return true;
 	}
 
-    public void Select()
+	public void Select()
 	{
 		EmitSignal(nameof(Selected), this);
 		(_sprite.Material as ShaderMaterial).SetShaderParam("intensity", 50);
@@ -153,7 +153,7 @@ public class Character : Node2D
 	public void Deselect() 
 	{
 		HidePatternPreview();
-        _isSelected = false;
+		_isSelected = false;
 		(_sprite.Material as ShaderMaterial).SetShaderParam("intensity", 0);
 		//_outline.Visible = false;
 		HideWalkHighlights();
@@ -162,12 +162,12 @@ public class Character : Node2D
 	public void ShowWalkHighlights() 
 	{
 		var availableDirections = new bool[4];
-        for (int i = 0; i < directions.Length; i++)
-        {
-            var target = directions[i] + MapIndex;
+		for (int i = 0; i < directions.Length; i++)
+		{
+			var target = directions[i] + MapIndex;
 			availableDirections[i] = CanMoveToMapIndex(target);
 			
-        }
+		}
 
 		_walkHighlights.ShowSides(availableDirections);
 	}

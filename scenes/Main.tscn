@@ -180,4 +180,3 @@ script = ExtResource( 12 )
 [connection signal="Selected" from="ObstructionMap/Character3" to="CharacterSelection" method="_on_Character_Selected"]
 [connection signal="Selected" from="ObstructionMap/Character4" to="CharacterSelection" method="_on_Character_Selected"]
 [connection signal="Selected" from="ObstructionMap/Character5" to="CharacterSelection" method="_on_Character_Selected"]
-[connection signal="EnergyChanged" from="EnergyHandler" to="CanvasLayer/Label" method="_on_EnergyHandler_EnergyChanged"]

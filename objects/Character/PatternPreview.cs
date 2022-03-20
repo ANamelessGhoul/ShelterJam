@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public class PatternPreview : Node2D
 {
+	[Export]
+	public Color placeableColor = Colors.Blue;
+	[Export]
+	public Color nonPlaceableColor = Colors.Red;
+
 	public bool IsShowing { get; private set; } = false;
 
     private Sprite _targetSprite;
@@ -27,7 +32,7 @@ public class PatternPreview : Node2D
 
 	}
 
-	public void ShowPreview(Resource deathPattern, Map map, Vector2 mapIndex)
+	public void ShowPreview(Resource deathPattern, ObstructionMap map, Vector2 mapIndex)
 	{
 		if (deathPattern == null)
 		{
@@ -41,6 +46,8 @@ public class PatternPreview : Node2D
 		{
 			var targetPosition = map.GetWorldPosition(position);
 			var target = _targetSprite.Duplicate() as Sprite;
+
+			target.Modulate = map.TileExistsAt(position) ? nonPlaceableColor : placeableColor;
 			target.Visible = true;
 			_targetParent.AddChild(target);
 			target.GlobalPosition = targetPosition;

@@ -4,12 +4,17 @@ using System.Collections.Generic;
 
 public class WalkHighlights : Node2D
 {
+    [Export]
+    public Color walkableColor = Colors.Blue;
+    [Export]
+    public Color nonWalkableColor = Colors.Red;
+
     public enum Side
     {
-        TopLeft,
         TopRight,
         BottomRight,
-        BottomLeft
+        BottomLeft,
+        TopLeft,
     }
 
     private Sprite[] _sprites = null;
@@ -17,18 +22,20 @@ public class WalkHighlights : Node2D
     public override void _Ready()
     {
         _sprites = new[]{
-            GetNode<Sprite>("TopLeft"),
             GetNode<Sprite>("TopRight"),
             GetNode<Sprite>("BottomRight"),
-            GetNode<Sprite>("BottomLeft")
+            GetNode<Sprite>("BottomLeft"),
+            GetNode<Sprite>("TopLeft"),
         };
     }
 
-    public void ShowSides(List<Side> sides) 
+    public void ShowSides(bool[] sidesToEnable) 
     {
-        foreach (var side in sides)
+        for (int i = 0; i < sidesToEnable.Length; i++)
         {
-            _sprites[(int)side].Visible = true;
+            _sprites[i].Visible = true;
+
+            _sprites[i].Modulate = sidesToEnable[i] ? walkableColor : nonWalkableColor;
         }
     }
 

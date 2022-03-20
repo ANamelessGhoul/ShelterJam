@@ -4,7 +4,10 @@ using System.Collections.Generic;
 
 public class GameSpace : Node2D
 {
-    internal Vector2 flagIndex;
+	[Signal]
+	public delegate void LevelWon();
+
+    public Vector2 flagIndex;
 
     public CharacterSelection CharacterSelection { get; private set; }
 	public ObstructionMap ObstructionMap { get; private set; }
@@ -53,4 +56,11 @@ public class GameSpace : Node2D
 		return characters;
 	}
 
+    public void PlayerMovedTo(Vector2 mapIndex)
+    {
+		if (mapIndex == flagIndex) 
+		{
+			EmitSignal("LevelWon");
+		}
+    }
 }

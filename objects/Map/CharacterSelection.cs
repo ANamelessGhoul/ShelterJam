@@ -116,8 +116,14 @@ public class CharacterSelection : Node2D
 			DeselectCharacter();
 			return;
 		}
+		// Moved
+
+		_gameSpace.PlayerMovedTo(mapIndex);
+
 
 		_gameSpace.SpendEnergy(moveEnergyCost);
+		
+
 	}
 
     public void _on_Character_Selected(Character character) 

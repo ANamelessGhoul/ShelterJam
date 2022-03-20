@@ -56,10 +56,10 @@ public class Character : Node2D
 		if (targetMapIndex.DistanceSquaredTo(MapIndex) > 1)
 			return false;
 
-		if (!_gameSpace.ObstructionMap.IsTileWalkable(targetMapIndex))
+		if (!_gameSpace.ObstructionMap.TileExistsAt(targetMapIndex))
 			return false;
 
-		if (_gameSpace.SpeedupMap.IsTileWalkable(targetMapIndex))
+		if (_gameSpace.SpeedupMap.TileExistsAt(targetMapIndex))
         {
 
         }

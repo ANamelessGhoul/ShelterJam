@@ -27,11 +27,8 @@ public class Map : TileMap
 		return WorldToMap(worldPosition - WorldOffset);
 	}
 
-	public bool IsTileWalkable(Vector2 mapIndex) 
+	public bool TileExistsAt(Vector2 mapIndex) 
 	{
-		// TODO: Update at every turn instead of each query
-		var wallCells = GetUsedCellsById(0);
-		
-		return !wallCells.Contains(mapIndex);
+		return GetCellv(mapIndex) != -1;
 	}
 }

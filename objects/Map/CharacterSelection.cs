@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 public class CharacterSelection : Node2D
 {
@@ -42,13 +43,21 @@ public class CharacterSelection : Node2D
 		_selectedCharacter = null;
 	}
 
-	private void OnClick() 
+	private void OnClick()
 	{
 		if (_selectedCharacter == null)
 			return;
 
 		if (_selectedCharacter.IsShowingSkillPreview)
 		{
+            int skillEnergyCost = _selectedCharacter.SkillEnergyCost;
+			if (skillEnergyCost > _gameSpace.EnergyHandler.Energy) 
+			{
+				GD.Print("Not enough energy to cast");
+				return;
+			}
+
+			_gameSpace.SpendEnergy(skillEnergyCost);
 			var positionsToApplySkill = _selectedCharacter.GetRotatedIndexes();
 			_gameSpace.SpeedupMap.SetTiles(positionsToApplySkill, _selectedCharacter.SkillId);
 			_selectedCharacter.DieOnSkillCast();
@@ -59,13 +68,22 @@ public class CharacterSelection : Node2D
 		if (mapIndex == _selectedCharacter.MapIndex)
 			return;
 
-		if (!_selectedCharacter.TryMoveToMapIndex(mapIndex))
+
+
+		var moveEnergyCost = _gameSpace.SpeedupMap.TileExistsAt(_selectedCharacter.MapIndex) ? 0 : 1;
+		var outOfEnergy = moveEnergyCost > _gameSpace.EnergyHandler.Energy;
+		if (outOfEnergy || !_selectedCharacter.TryMoveToMapIndex(mapIndex))
 		{
+			if (outOfEnergy)
+				GD.Print("Not enough energy to Move");
 			DeselectCharacter();
+			return;
 		}
+
+		_gameSpace.SpendEnergy(moveEnergyCost);
 	}
 
-	public void _on_Character_Selected(Character character) 
+    public void _on_Character_Selected(Character character) 
 	{
 		_selectedCharacter = character;
 	}

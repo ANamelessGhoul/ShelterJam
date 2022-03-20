@@ -9,6 +9,8 @@ public class Character : Node2D
 
 	[Export]
 	private Resource pattern;
+	[Export]
+	public int SkillEnergyCost;
 	public Vector2 MapIndex { get; private set; }
 	public int SkillId { get; private set; }
 	public bool IsShowingSkillPreview => _patternPreview.IsShowing;

@@ -31,6 +31,8 @@ public class CharacterInput : Area2D
 				EmitSignal(nameof(Clicked));
 			}
 		}
+
+		GetTree().SetInputAsHandled();
 	}
 
 }

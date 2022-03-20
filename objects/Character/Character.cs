@@ -18,6 +18,7 @@ public class Character : Node2D
 	private bool _isSelected;
 
 	private Sprite _sprite;
+	private Sprite _outline;
 	private Sounds _sounds;
 	private Map _map;  // Any map
 	private GameSpace _gameSpace;
@@ -28,7 +29,10 @@ public class Character : Node2D
 		_sounds = this.GetSingleton<Sounds>();
 		_patternPreview = GetNode<PatternPreview>("PatternPreview");
 		_sprite = GetNode<Sprite>("Sprite");
-		_gameSpace = GetParent<GameSpace>();
+		_outline = GetNode<Sprite>("Sprite/Outline");
+		_gameSpace = GetNode<GameSpace>("../..");
+
+		//_sprite.ZIndex = (int)Position.y;
 
 		CallDeferred(nameof(GetMapIndex));
 	}
@@ -92,6 +96,7 @@ public class Character : Node2D
 		_sounds.PlaySound("Walk");
 		MapIndex = targetMapIndex;
 		GlobalPosition = _map.GetWorldPosition(MapIndex);
+		//_sprite.ZIndex = (int)Position.y;
 		return true;
 	}
 
@@ -99,6 +104,7 @@ public class Character : Node2D
 	{
 		EmitSignal(nameof(Selected), this);
 		_sprite.SelfModulate = Colors.DarkGray;
+		_outline.Visible = true;
 		_isSelected = true;
 	}
 
@@ -107,6 +113,8 @@ public class Character : Node2D
 		_sprite.SelfModulate = Colors.White;
 		HidePatternPreview();
 		_isSelected = false;
+		_outline.Visible = false;
+
 	}
 
 	public void TogglePatternPreview()

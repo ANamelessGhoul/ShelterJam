@@ -11,13 +11,17 @@ public class CharacterSelection : Node2D
 		_gameSpace = GetParent<GameSpace>();
 	}
 
-    public override void _Process(float delta)
+    public override void _UnhandledInput(InputEvent @event)
     {
 		if (Input.IsActionJustPressed("click"))
 		{
 			OnClick();
 		}
-		else if (Input.IsActionJustPressed("cancel_select"))
+	}
+    public override void _Process(float delta)
+    {
+
+		if (Input.IsActionJustPressed("cancel_select"))
 		{
 			DeselectCharacter();
 		}
@@ -39,6 +43,10 @@ public class CharacterSelection : Node2D
 	{
 		if (_selectedCharacter == null)
 			return;
+
+		if (!IsInstanceValid(_selectedCharacter))
+			return;
+
 		_selectedCharacter.Deselect();
 		_selectedCharacter = null;
 	}
@@ -46,6 +54,9 @@ public class CharacterSelection : Node2D
 	private void OnClick()
 	{
 		if (_selectedCharacter == null)
+			return;
+
+		if (!IsInstanceValid(_selectedCharacter))
 			return;
 
 		if (_selectedCharacter.IsShowingSkillPreview)
@@ -85,7 +96,7 @@ public class CharacterSelection : Node2D
 
     public void _on_Character_Selected(Character character) 
 	{
-		_selectedCharacter = character;
+		SelectCharacter(character);
 	}
 
 }

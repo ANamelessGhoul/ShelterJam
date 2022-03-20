@@ -30,6 +30,7 @@ public class CharacterSelection : Node2D
     }
 	public void SelectCharacter(Character character)
 	{
+		DeselectCharacter();
 		_selectedCharacter = character;
 	}
 
@@ -50,6 +51,7 @@ public class CharacterSelection : Node2D
 		{
 			var positionsToApplySkill = _selectedCharacter.GetRotatedIndexes();
 			_gameSpace.SpeedupMap.SetTiles(positionsToApplySkill, _selectedCharacter.SkillId);
+			_selectedCharacter.DieOnSkillCast();
 			return;
 		}
 

@@ -82,8 +82,17 @@ public class Character : Node2D
 
 	public void DieOnSkillCast()
     {
+		var death = GetNode("Death") as Node2D;
+		var deathAnimation = death.GetNode("AnimatedSprite") as AnimatedSprite;
+		deathAnimation.Playing = true;
+		deathAnimation.Visible = true;
+		var timer = death.GetNode("Timer") as Timer;
+		RemoveChild(death);
+		GetParent().AddChild(death);
+		death.GlobalPosition = GlobalPosition;
+		timer.Start();
 		QueueFree();
-    }
+	}
 
     public List<Vector2> GetRotatedIndexes()
     {

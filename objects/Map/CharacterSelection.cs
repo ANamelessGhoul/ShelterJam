@@ -67,12 +67,26 @@ public class CharacterSelection : Node2D
 				GD.Print("Not enough energy to cast");
 				return;
 			}
-
-			_gameSpace.SpendEnergy(skillEnergyCost);
+			// Apply Cast
 			var positionsToApplySkill = _selectedCharacter.GetRotatedIndexes();
-			_gameSpace.SpeedupMap.SetTiles(positionsToApplySkill, _selectedCharacter.SkillId);
-			_selectedCharacter.DieOnSkillCast();
+			var isOverlappingWithWall = false;
+            foreach (var position in positionsToApplySkill)
+            {
+				if (_gameSpace.ObstructionMap.TileExistsAt(position)) 
+				{
+					isOverlappingWithWall = true;
+					break;
+				}
+            }
+
+			if (!isOverlappingWithWall) 
+			{
+				_gameSpace.SpendEnergy(skillEnergyCost);
+				_gameSpace.SpeedupMap.SetTiles(positionsToApplySkill, _selectedCharacter.SkillId);
+				_selectedCharacter.DieOnSkillCast();
+			}
 			return;
+
 		}
 
 		var mapIndex = _gameSpace.ObstructionMap.WorldToMap(GetGlobalMousePosition());

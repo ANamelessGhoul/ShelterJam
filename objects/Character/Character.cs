@@ -9,7 +9,6 @@ public class Character : Node2D
 
 	[Export]
 	private Resource pattern = null;
-	private Resource pattern;
 	[Export]
 	public int SkillEnergyCost;
 	public Vector2 MapIndex { get; private set; }
@@ -93,11 +92,6 @@ public class Character : Node2D
 		if (!CanMoveToMapIndex(targetMapIndex))
 			return false;
 
-		if (_gameSpace.ObstructionMap.TileExistsAt(targetMapIndex))
-			return false;
-
-		if (_gameSpace.CheckIfOverlappingWithCharacters(targetMapIndex))
-			return false;
 		// Move
 		_sounds.PlaySound("Walk");
 		MapIndex = targetMapIndex;
@@ -105,19 +99,7 @@ public class Character : Node2D
 		return true;
 	}
 
-	public bool CanMoveToMapIndex(Vector2 targetMapIndex) 
-	{
-		if (targetMapIndex.DistanceSquaredTo(MapIndex) > 1)
-			return false;
-
-		if (_gameSpace.ObstructionMap.TileExistsAt(targetMapIndex))
-			return false;
-
-		//_sprite.ZIndex = (int)Position.y;
-		return true;
-	}
-
-	public bool CanThisCharacterMoveToPosition(Vector2 targetMapIndex)
+	public bool CanMoveToMapIndex(Vector2 targetMapIndex)
 	{
 		// Location blocked cheks
 		if (targetMapIndex.DistanceSquaredTo(MapIndex) > 1)
@@ -126,7 +108,7 @@ public class Character : Node2D
 		if (_gameSpace.ObstructionMap.TileExistsAt(targetMapIndex))
 			return false;
 
-		if (_gameSpace.CheckIfOverlappingWithCharacters(targetMapIndex))
+		if (_gameSpace.IsPositionOverlappingWithCharacters(targetMapIndex))
 			return false;
 
 		// Energy checks
@@ -137,6 +119,7 @@ public class Character : Node2D
 
 		if (_gameSpace.EnergyHandler.Energy == 0)
 			return false;
+
 		
 		return true;
 	}

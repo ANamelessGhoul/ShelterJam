@@ -9,6 +9,8 @@ public class Character : Node2D
 
 	[Export]
 	private Resource pattern;
+	[Export]
+	public int SkillEnergyCost;
 	public Vector2 MapIndex { get; private set; }
 	public int SkillId { get; private set; }
 	public bool IsShowingSkillPreview => _patternPreview.IsShowing;
@@ -62,13 +64,8 @@ public class Character : Node2D
 		if (targetMapIndex.DistanceSquaredTo(MapIndex) > 1)
 			return false;
 
-		if (!_gameSpace.ObstructionMap.TileExistsAt(targetMapIndex))
+		if (_gameSpace.ObstructionMap.TileExistsAt(targetMapIndex))
 			return false;
-
-		if (_gameSpace.SpeedupMap.TileExistsAt(targetMapIndex))
-        {
-
-        }
 
 		// Move
 		_sounds.PlaySound("Walk");

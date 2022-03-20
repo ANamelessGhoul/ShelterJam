@@ -13,6 +13,8 @@ public class Character : Node2D
 	public int SkillId { get; private set; }
 	public bool IsShowingSkillPreview => _patternPreview.IsShowing;
 
+	private bool _isSelected;
+
 	private Sprite _sprite;
 	private Sounds _sounds;
 	private Map _map;  // Any map
@@ -37,21 +39,35 @@ public class Character : Node2D
 
     public override void _Process(float delta)
     {
+		if (_isSelected)
+			ProcessSkillRotation();
+
+	}
+	private void ProcessSkillRotation()
+	{
+		if (!_patternPreview.IsShowing)
+			return;
+
 		if (Input.IsActionJustReleased("rotate_cw"))
 		{
 			_patternPreview.RotateClockwise(1);
 			HidePatternPreview();
 			ShowPatternPreview();
 		}
-		else if (Input.IsActionJustReleased("rotate_ccw")) 
+		else if (Input.IsActionJustReleased("rotate_ccw"))
 		{
 			_patternPreview.RotateClockwise(-1);
 			HidePatternPreview();
 			ShowPatternPreview();
 		}
+	}
+
+	public void DieOnSkillCast()
+    {
+		QueueFree();
     }
 
-	public List<Vector2> GetRotatedIndexes()
+    public List<Vector2> GetRotatedIndexes()
     {
         List<Vector2> indexes = _patternPreview.GetRotatedMapIndexes(pattern, MapIndex);
 		return indexes;
@@ -62,10 +78,10 @@ public class Character : Node2D
 		if (targetMapIndex.DistanceSquaredTo(MapIndex) > 1)
 			return false;
 
-		if (!_gameSpace.ObstructionMap.TileExistsAt(targetMapIndex))
+		if (_gameSpace.ObstructionMap.TileExistsAt(targetMapIndex))
 			return false;
 
-		if (_gameSpace.SpeedupMap.TileExistsAt(targetMapIndex))
+		if (!_gameSpace.SpeedupMap.TileExistsAt(targetMapIndex))
         {
 
         }
@@ -81,12 +97,14 @@ public class Character : Node2D
 	{
 		EmitSignal(nameof(Selected), this);
 		_sprite.SelfModulate = Colors.DarkGray;
+		_isSelected = true;
 	}
 
 	public void Deselect() 
 	{
 		_sprite.SelfModulate = Colors.White;
 		HidePatternPreview();
+		_isSelected = false;
 	}
 
 	public void TogglePatternPreview()

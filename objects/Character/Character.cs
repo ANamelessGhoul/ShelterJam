@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public class Character : Node2D
@@ -24,8 +25,13 @@ public class Character : Node2D
 		_patternPreview = GetNode<PatternPreview>("PatternPreview");
 		_sprite = GetNode<Sprite>("Sprite");
 		_gameSpace = GetParent<GameSpace>();
+
+		CallDeferred(nameof(GetMapIndex));
+	}
+
+    private void GetMapIndex()
+	{
 		_map = _gameSpace.VisualMap;
-		GD.Print(_gameSpace);
 		MapIndex = _map.GetMapIndex(GlobalPosition);
 	}
 

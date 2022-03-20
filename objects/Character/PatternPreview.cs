@@ -9,7 +9,7 @@ public class PatternPreview : Node2D
     private Sprite _targetSprite;
     private Node2D _targetParent;
 
-	private int rotations = 2;
+	private int rotations = 0;
 
     public override void _Ready()
     {

@@ -20,19 +20,19 @@ _global_script_class_icons={
 
 [application]
 
-config/name="ShelterJam"
+config/name="NecroSplat"
 run/main_scene="res://scenes/SceneManager.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-GameManager="*res://scripts/GameManager.cs"
 Sounds="*res://sounds/Sounds.tscn"
 
 [display]
 
 window/size/width=480
 window/size/height=270
+window/size/fullscreen=true
 window/size/test_width=960
 window/size/test_height=540
 window/stretch/mode="viewport"

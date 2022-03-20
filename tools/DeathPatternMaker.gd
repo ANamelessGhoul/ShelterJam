@@ -6,8 +6,13 @@ export var savePath : String = "res://Pattern.tres"
 
 func _ready():
 	var tilemap: TileMap = $TileMap
-	var pivot = tilemap.get_used_cells_by_id(0)[0]
-	var positions = tilemap.get_used_cells_by_id(1)
+	var tile_set: TileSet = tilemap.tile_set
+	var pivotIndex = tile_set.find_tile_by_name("Pivot")
+	var tileIndex = tile_set.find_tile_by_name("Tile")
+	
+	
+	var pivot = tilemap.get_used_cells_by_id(pivotIndex)[0]
+	var positions = tilemap.get_used_cells_by_id(tileIndex)
 	
 	if includePivot:
 		positions.append(pivot)

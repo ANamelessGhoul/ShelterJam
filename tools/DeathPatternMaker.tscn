@@ -4,7 +4,7 @@
 [ext_resource path="res://sprites/EmptyTile.png" type="Texture" id=2]
 
 [sub_resource type="TileSet" id=1]
-0/name = "EmptyTile.png 0"
+0/name = "Pivot"
 0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 0.219608, 1, 0, 1 )
@@ -18,7 +18,7 @@
 0/shape_one_way_margin = 0.0
 0/shapes = [  ]
 0/z_index = 0
-1/name = "EmptyTile.png 1"
+1/name = "Tile"
 1/texture = ExtResource( 2 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )

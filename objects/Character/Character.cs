@@ -51,6 +51,7 @@ public class Character : Node2D
 	{
 		_map = _gameSpace.VisualMap;
 		MapIndex = _map.GetMapIndex(GlobalPosition);
+		GlobalPosition = _map.GetWorldPosition(MapIndex);
 	}
 
 	public override void _Process(float delta)

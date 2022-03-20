@@ -4,6 +4,7 @@
 [ext_resource path="res://objects/Flag/Flag.cs" type="Script" id=2]
 
 [node name="Flag" type="Sprite"]
-position = Vector2( 225, 156 )
 texture = ExtResource( 1 )
+centered = false
+offset = Vector2( -9, -14 )
 script = ExtResource( 2 )

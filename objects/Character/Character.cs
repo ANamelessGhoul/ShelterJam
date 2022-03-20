@@ -69,12 +69,14 @@ public class Character : Node2D
 			_patternPreview.RotateClockwise(1);
 			HidePatternPreview();
 			ShowPatternPreview();
+			_sounds.PlaySound("RotateIndicator");
 		}
 		else if (Input.IsActionJustReleased("rotate_ccw"))
 		{
 			_patternPreview.RotateClockwise(-1);
 			HidePatternPreview();
 			ShowPatternPreview();
+			_sounds.PlaySound("RotateIndicator");
 		}
 	}
 
@@ -95,7 +97,11 @@ public class Character : Node2D
 			return false;
 
 		// Move
-		_sounds.PlaySound("Walk");
+		if (_gameSpace.SpeedupMap.TileExistsAt(targetMapIndex))
+			_sounds.PlaySound("WalkSpedUp");
+        else
+			_sounds.PlaySound("Walk");
+
 		MapIndex = targetMapIndex;
 		GlobalPosition = _map.GetWorldPosition(MapIndex);
 		return true;

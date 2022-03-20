@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bolum_gecme.wav-8a47f7b9aa8d2b7f9b9a7b3b1d15911b.sample"
+
+[deps]
+
+source_file="res://sounds/bolum_gecme.wav"
+dest_files=[ "res://.import/bolum_gecme.wav-8a47f7b9aa8d2b7f9b9a7b3b1d15911b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/shelter_jam_puzzle1_normalized.mp3-f9bd9a8f4bf284ebfac57a87bd58684b.mp3str"
+
+[deps]
+
+source_file="res://sounds/shelter_jam_puzzle1_normalized.mp3"
+dest_files=[ "res://.import/shelter_jam_puzzle1_normalized.mp3-f9bd9a8f4bf284ebfac57a87bd58684b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

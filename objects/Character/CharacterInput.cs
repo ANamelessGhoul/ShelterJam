@@ -10,6 +10,27 @@ public class CharacterInput : Area2D
 
 	public bool IsHovering { get; private set; }
 
+	private bool _isClicked = false;
+
+	public override void _Process(float delta) 
+	{
+		ProcessClick();
+	}
+
+	private void ProcessClick() 
+	{
+		if (!_isClicked)
+			return;
+
+		CallDeferred(nameof(EmitClickedSignal));
+		_isClicked = false;
+	}
+
+	public void EmitClickedSignal() 
+	{
+		EmitSignal(nameof(Clicked));
+	}
+
 	private void _on_Input_mouse_entered() 
 	{
 		IsHovering = true;
@@ -28,7 +49,7 @@ public class CharacterInput : Area2D
 		{
 			if (mouseButtonInput.IsPressed() && mouseButtonInput.ButtonIndex == (int)ButtonList.Left) 
 			{
-				EmitSignal(nameof(Clicked));
+				_isClicked = true;
 			}
 		}
 

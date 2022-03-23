@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://sprites/CubeWithSpace.png" type="Texture" id=1]
 [ext_resource path="res://sprites/WhiteTile.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://objects/Character/Character.tscn" type="PackedScene" id=11]
 [ext_resource path="res://objects/Flag/Flag.tscn" type="PackedScene" id=12]
 [ext_resource path="res://patterns/Level2-Pattern1.tres" type="Resource" id=13]
+[ext_resource path="res://sprites/UserInterface.png" type="Texture" id=14]
 
 [sub_resource type="TileSet" id=1]
 0/name = "WhiteTile.png 0"
@@ -163,6 +164,12 @@ margin_right = 40.0
 margin_bottom = 14.0
 custom_fonts/font = SubResource( 4 )
 script = ExtResource( 7 )
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 14 )
 
 [connection signal="Selected" from="ObstructionMap/Character" to="CharacterSelection" method="_on_Character_Selected"]
 [connection signal="Selected" from="ObstructionMap/Character2" to="CharacterSelection" method="_on_Character_Selected"]

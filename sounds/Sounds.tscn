@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://sounds/step.wav" type="AudioStream" id=1]
 [ext_resource path="res://sounds/yetenek_kullan.wav" type="AudioStream" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://sounds/piyon_sec.wav" type="AudioStream" id=8]
 [ext_resource path="res://sounds/rotate.wav" type="AudioStream" id=9]
 [ext_resource path="res://sounds/Elinde_Ates_Var.wav" type="AudioStream" id=10]
+[ext_resource path="res://sounds/main_theme.ogg" type="AudioStream" id=11]
 
 [node name="Node" type="Node"]
 script = ExtResource( 5 )
@@ -41,3 +42,8 @@ stream = ExtResource( 8 )
 [node name="Elinde_Ates_Var" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 volume_db = -11.647
+
+[node name="MainTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -15.0
+autoplay = true

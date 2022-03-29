@@ -142,6 +142,11 @@ public class Character : Node2D
 		return true;
 	}
 
+	public void ConnectSignal(string signalName, Godot.Object target, string methodName) 
+	{
+		Connect(signalName, target, methodName);
+	}
+
 	public void Select()
 	{
 		EmitSignal(nameof(Selected), this);

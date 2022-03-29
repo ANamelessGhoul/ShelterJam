@@ -11,9 +11,16 @@ public class CharacterSelection : Node2D
 	{
 		_gameSpace = GetParent<GameSpace>();
 		_sounds = this.GetSingleton<Sounds>();
+
+		ConnectPlayerSignals();
 	}
 
-	public override void _UnhandledInput(InputEvent @event)
+    private void ConnectPlayerSignals()
+    {
+		GetTree().CallGroup("Character", "ConnectSignal", "Selected", this, "_on_Character_Selected");
+    }
+
+    public override void _UnhandledInput(InputEvent @event)
 	{
 		if (Input.IsActionJustPressed("click"))
 		{

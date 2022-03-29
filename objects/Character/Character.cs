@@ -126,6 +126,9 @@ public class Character : Node2D
 		if (_gameSpace.ObstructionMap.TileExistsAt(targetMapIndex))
 			return false;
 
+		if (!_gameSpace.WalkableMap.TileExistsAt(targetMapIndex))
+			return false;
+
 		if (_gameSpace.IsPositionOverlappingWithCharacters(targetMapIndex))
 			return false;
 
@@ -199,7 +202,7 @@ public class Character : Node2D
 
 	public void ShowPatternPreview() 
 	{
-		_patternPreview.ShowPreview(pattern, (ObstructionMap)_gameSpace.ObstructionMap, MapIndex);
+		_patternPreview.ShowPreview(pattern, _gameSpace, MapIndex);
 	}
 
 	public void HidePatternPreview() 

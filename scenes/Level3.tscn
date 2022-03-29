@@ -1,176 +1,32 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://sprites/CubeWithSpace.png" type="Texture" id=1]
-[ext_resource path="res://sprites/WhiteTile.png" type="Texture" id=2]
-[ext_resource path="res://objects/Map/CharacterSelection.cs" type="Script" id=3]
-[ext_resource path="res://scripts/EnergyHandler.cs" type="Script" id=4]
-[ext_resource path="res://objects/Map/Map.cs" type="Script" id=5]
-[ext_resource path="res://objects/Map/SkillMap.cs" type="Script" id=6]
-[ext_resource path="res://scripts/EnergyLabel.cs" type="Script" id=7]
-[ext_resource path="res://objects/Map/ObstructionMap.cs" type="Script" id=8]
-[ext_resource path="res://wellbutrin.regular.ttf" type="DynamicFontData" id=9]
-[ext_resource path="res://scripts/GameSpace.cs" type="Script" id=10]
+[ext_resource path="res://scenes/Template.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/Flag.png" type="Texture" id=2]
+[ext_resource path="res://objects/Flag/Flag.cs" type="Script" id=3]
+[ext_resource path="res://patterns/Level3-Pattern1.tres" type="Resource" id=4]
 [ext_resource path="res://objects/Character/Character.tscn" type="PackedScene" id=11]
 [ext_resource path="res://objects/Flag/Flag.tscn" type="PackedScene" id=12]
-[ext_resource path="res://patterns/Level3-Pattern1.tres" type="Resource" id=13]
-[ext_resource path="res://sprites/UserInterface.png" type="Texture" id=14]
+[ext_resource path="res://patterns/Level2-Pattern1.tres" type="Resource" id=13]
 
-[sub_resource type="TileSet" id=1]
-0/name = "WhiteTile.png 0"
-0/texture = ExtResource( 2 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 0.455, 0.485, 0.5, 1 )
-0/region = Rect2( 0, 0, 32, 32 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
+[node name="GameSpace" instance=ExtResource( 1 )]
 
-[sub_resource type="TileSet" id=2]
-0/name = "WhiteTile.png 0"
-0/texture = ExtResource( 2 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 0.0784314, 0.780392, 0.858824, 1 )
-0/region = Rect2( 0, 0, 32, 32 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
+[node name="WalkableMap" parent="." index="1"]
+tile_data = PoolIntArray( -131054, 1, 0, -131053, 1, 0, -131052, 1, 0, -131051, 1, 0, -131050, 1, 0, -65518, 1, 0, 18, 1, 0, 65554, 1, 0, 131090, 1, 0, 196626, 1, 0 )
 
-[sub_resource type="TileSet" id=3]
-0/name = "Placeholder"
-0/texture = ExtResource( 2 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 0, 0, 1 )
-0/region = Rect2( 0, 0, 32, 32 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-2/name = "Wall"
-2/texture = ExtResource( 1 )
-2/tex_offset = Vector2( 0, -11 )
-2/modulate = Color( 1, 1, 1, 1 )
-2/region = Rect2( 0, 0, 32, 32 )
-2/tile_mode = 0
-2/occluder_offset = Vector2( 0, 0 )
-2/navigation_offset = Vector2( 0, 0 )
-2/shape_offset = Vector2( 0, 0 )
-2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-2/shape_one_way = false
-2/shape_one_way_margin = 0.0
-2/shapes = [  ]
-2/z_index = 0
-3/name = "Invisible"
-3/texture = ExtResource( 2 )
-3/tex_offset = Vector2( 0, 0 )
-3/modulate = Color( 1, 1, 1, 0 )
-3/region = Rect2( 0, 0, 32, 32 )
-3/tile_mode = 0
-3/occluder_offset = Vector2( 0, 0 )
-3/navigation_offset = Vector2( 0, 0 )
-3/shape_offset = Vector2( 0, 0 )
-3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-3/shape_one_way = false
-3/shape_one_way_margin = 0.0
-3/shapes = [  ]
-3/z_index = 0
-
-[sub_resource type="DynamicFont" id=4]
-size = 32
-font_data = ExtResource( 9 )
-
-[node name="GameSpace" type="Node2D"]
-script = ExtResource( 10 )
-
-[node name="CharacterSelection" type="Node2D" parent="."]
-script = ExtResource( 3 )
-
-[node name="VisualMap" type="TileMap" parent="."]
-z_index = -500
-mode = 1
-tile_set = SubResource( 1 )
-cell_size = Vector2( 28, 14 )
-cell_custom_transform = Transform2D( 28, 0, 0, 14, 0, 0 )
-cell_tile_origin = 1
-format = 1
-tile_data = PoolIntArray( -131054, 0, 0, -131053, 0, 0, -131052, 0, 0, -131051, 0, 0, -131050, 0, 0, -65518, 0, 0, 18, 0, 0, 65554, 0, 0, 131090, 0, 0, 196626, 0, 0 )
-script = ExtResource( 5 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="SpeedupMap" type="TileMap" parent="."]
-z_index = -500
-mode = 1
-tile_set = SubResource( 2 )
-cell_size = Vector2( 28, 14 )
-cell_custom_transform = Transform2D( 28, 0, 0, 14, 0, 0 )
-cell_tile_origin = 1
-format = 1
-script = ExtResource( 6 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="ObstructionMap" type="TileMap" parent="."]
-mode = 1
-tile_set = SubResource( 3 )
-cell_size = Vector2( 28, 14 )
-cell_custom_transform = Transform2D( 28, 0, 0, 14, 0, 0 )
-cell_tile_origin = 1
-cell_y_sort = true
-format = 1
-tile_data = PoolIntArray( -196591, 0, 0, -196590, 0, 0, -196589, 0, 0, -196588, 0, 0, -196587, 0, 0, -196586, 0, 0, -196585, 0, 0, -131055, 0, 0, -131049, 0, 0, -65519, 0, 0, -65517, 0, 0, -65516, 0, 0, -65515, 0, 0, -65514, 0, 0, -65513, 0, 0, 17, 0, 0, 19, 0, 0, 65553, 0, 0, 65555, 0, 0, 131089, 0, 0, 131091, 0, 0, 196625, 0, 0, 196627, 0, 0, 262161, 0, 0, 262162, 0, 0, 262163, 0, 0 )
-script = ExtResource( 8 )
-
-[node name="Flag" parent="ObstructionMap" instance=ExtResource( 12 )]
-position = Vector2( 337, 148 )
-
-[node name="Character" parent="ObstructionMap" instance=ExtResource( 11 )]
-position = Vector2( 221, 150 )
-pattern = ExtResource( 13 )
-
-[node name="Character2" parent="ObstructionMap" instance=ExtResource( 11 )]
+[node name="Character" parent="ObstructionMap" index="1" instance=ExtResource( 11 )]
 position = Vector2( 210, 154 )
 pattern = ExtResource( 13 )
 
-[node name="EnergyHandler" type="Node" parent="."]
-script = ExtResource( 4 )
+[node name="Character2" parent="ObstructionMap" index="2" instance=ExtResource( 11 )]
+position = Vector2( 224, 147 )
+pattern = ExtResource( 4 )
+
+[node name="Flag" type="Sprite" parent="ObstructionMap" index="3" instance=ExtResource( 12 )]
+position = Vector2( 336, 147 )
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( -9, -14 )
+script = ExtResource( 3 )
+
+[node name="EnergyHandler" parent="." index="5"]
 Energy = 8
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 240, 135 )
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-margin_right = 40.0
-margin_bottom = 14.0
-custom_fonts/font = SubResource( 4 )
-script = ExtResource( 7 )
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-texture = ExtResource( 14 )
-
-[connection signal="Selected" from="ObstructionMap/Character" to="CharacterSelection" method="_on_Character_Selected"]
-[connection signal="Selected" from="ObstructionMap/Character2" to="CharacterSelection" method="_on_Character_Selected"]
-[connection signal="EnergyChanged" from="EnergyHandler" to="CanvasLayer/Label" method="_on_EnergyHandler_EnergyChanged"]

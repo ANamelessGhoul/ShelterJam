@@ -32,7 +32,7 @@ public class PatternPreview : Node2D
 
 	}
 
-	public void ShowPreview(Resource deathPattern, ObstructionMap map, Vector2 mapIndex)
+	public void ShowPreview(Resource deathPattern, GameSpace space, Vector2 mapIndex)
 	{
 		if (deathPattern == null)
 		{
@@ -44,10 +44,14 @@ public class PatternPreview : Node2D
 
         foreach (Vector2 position in rotatedPositons)
 		{
-			var targetPosition = map.GetWorldPosition(position);
+			var targetPosition = space.WalkableMap.GetWorldPosition(position);
 			var target = _targetSprite.Duplicate() as Sprite;
 
-			target.Modulate = map.TileExistsAt(position) ? nonPlaceableColor : placeableColor;
+			var isOnObstruction = space.ObstructionMap.TileExistsAt(position);
+			var isOnWalkable = space.WalkableMap.TileExistsAt(position);
+			var isPlaceable = !isOnObstruction && isOnWalkable;
+
+			target.Modulate = isPlaceable ? placeableColor : nonPlaceableColor;
 			target.Visible = true;
 			_targetParent.AddChild(target);
 			target.GlobalPosition = targetPosition;

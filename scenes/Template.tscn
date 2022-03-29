@@ -1,0 +1,149 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://objects/Map/TileSets/ObjectObstructionMap.tres" type="TileSet" id=1]
+[ext_resource path="res://sprites/WhiteTile.png" type="Texture" id=2]
+[ext_resource path="res://objects/Map/CharacterSelection.cs" type="Script" id=3]
+[ext_resource path="res://scripts/EnergyHandler.cs" type="Script" id=4]
+[ext_resource path="res://objects/Map/Map.cs" type="Script" id=5]
+[ext_resource path="res://objects/Map/SkillMap.cs" type="Script" id=6]
+[ext_resource path="res://scripts/EnergyLabel.cs" type="Script" id=7]
+[ext_resource path="res://objects/Map/ObstructionMap.cs" type="Script" id=8]
+[ext_resource path="res://wellbutrin.regular.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://scripts/GameSpace.cs" type="Script" id=10]
+[ext_resource path="res://sprites/UserInterface.png" type="Texture" id=14]
+[ext_resource path="res://objects/Map/MapEditor.gd" type="Script" id=17]
+
+[sub_resource type="TileSet" id=5]
+1/name = "FloorTile"
+1/texture = ExtResource( 2 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 0.454902, 0.486275, 0.501961, 1 )
+1/region = Rect2( 0, 0, 32, 32 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+
+[sub_resource type="TileSet" id=1]
+0/name = "WhiteTile.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 0.454902, 0.486275, 0.501961, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="TileSet" id=2]
+0/name = "WhiteTile.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 0.0784314, 0.780392, 0.858824, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 9 )
+
+[node name="GameSpace" type="Node2D"]
+script = ExtResource( 10 )
+
+[node name="CharacterSelection" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="WalkableMap" type="TileMap" parent="."]
+z_index = -500
+mode = 1
+tile_set = SubResource( 5 )
+cell_size = Vector2( 28, 14 )
+cell_custom_transform = Transform2D( 28, 0, 0, 14, 0, 0 )
+cell_tile_origin = 1
+format = 1
+tile_data = PoolIntArray( -131054, 1, 0, -65518, 1, 0, 18, 1, 0, 65554, 1, 0, 131090, 1, 0, 196626, 1, 0 )
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="VisualMap" type="TileMap" parent="."]
+z_index = -500
+mode = 1
+tile_set = SubResource( 1 )
+cell_size = Vector2( 28, 14 )
+cell_custom_transform = Transform2D( 28, 0, 0, 14, 0, 0 )
+cell_tile_origin = 1
+format = 1
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SpeedupMap" type="TileMap" parent="."]
+z_index = -500
+mode = 1
+tile_set = SubResource( 2 )
+cell_size = Vector2( 28, 14 )
+cell_custom_transform = Transform2D( 28, 0, 0, 14, 0, 0 )
+cell_tile_origin = 1
+format = 1
+script = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ObstructionMap" type="TileMap" parent="."]
+mode = 1
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 28, 14 )
+cell_custom_transform = Transform2D( 28, 0, 0, 14, 0, 0 )
+cell_tile_origin = 1
+cell_y_sort = true
+format = 1
+script = ExtResource( 8 )
+
+[node name="MapEditor" type="Node" parent="ObstructionMap"]
+script = ExtResource( 17 )
+
+[node name="EnergyHandler" type="Node" parent="."]
+script = ExtResource( 4 )
+Energy = 6
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 240, 135 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 14 )
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 44.0
+custom_fonts/font = SubResource( 4 )
+text = "1"
+script = ExtResource( 7 )
+
+[connection signal="EnergyChanged" from="EnergyHandler" to="CanvasLayer/Label" method="_on_EnergyHandler_EnergyChanged"]

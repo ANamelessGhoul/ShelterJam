@@ -1,0 +1,49 @@
+[gd_resource type="TileSet" load_steps=4 format=2]
+
+[ext_resource path="res://sprites/Character/sprite1.png" type="Texture" id=2]
+[ext_resource path="res://sprites/CubeWithSpace.png" type="Texture" id=3]
+[ext_resource path="res://sprites/Flag.png" type="Texture" id=4]
+
+[resource]
+2/name = "Wall"
+2/texture = ExtResource( 3 )
+2/tex_offset = Vector2( 0, -11 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 0, 32, 32 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+4/name = "Character OBJ"
+4/texture = ExtResource( 2 )
+4/tex_offset = Vector2( 0, -14 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 0, 0, 32, 32 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
+4/shapes = [  ]
+4/z_index = 0
+5/name = "Flag OBJ"
+5/texture = ExtResource( 4 )
+5/tex_offset = Vector2( 5, -8 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 0, 0, 32, 32 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
+5/shapes = [  ]
+5/z_index = 0

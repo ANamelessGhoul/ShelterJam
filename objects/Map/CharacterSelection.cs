@@ -83,18 +83,20 @@ public class CharacterSelection : Node2D
 
 			// Apply Cast
 			var positionsToApplySkill = _selectedCharacter.GetRotatedIndexes();
-			var isOverlappingWithWall = false;
+			var canCastSkill = true;
 			foreach (var position in positionsToApplySkill)
 			{
-				if (_gameSpace.ObstructionMap.TileExistsAt(position)) 
+				var isOnObstruction = _gameSpace.ObstructionMap.TileExistsAt(position);
+				var isOnWalkable = _gameSpace.WalkableMap.TileExistsAt(position);
+				if (isOnObstruction || !isOnWalkable) 
 				{
-					isOverlappingWithWall = true;
+					canCastSkill = false;
 					break;
 				}
 			}
 
 
-			if (!isOverlappingWithWall) 
+			if (canCastSkill) 
 			{
 				// Cast the skill, actually
 				_sounds.PlaySound("CastSpell");

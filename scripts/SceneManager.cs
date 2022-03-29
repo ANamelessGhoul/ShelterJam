@@ -3,13 +3,14 @@ using System;
 
 public class SceneManager : Node2D
 {
-	private int levelIndex = 1;
+	[Export]
+	public int levelIndex = 1;
 
 	private GameSpace activeLevel = null;
 
 	public override void _Ready()
 	{
-		PackedScene x = (PackedScene)GD.Load($"res://scenes/Level1.tscn");
+		PackedScene x = (PackedScene)GD.Load($"res://scenes/Level{levelIndex}.tscn");
 		activeLevel = x.Instance<GameSpace>();
 		activeLevel.Connect("LevelWon", this, nameof(LoadNextLevel));
 		AddChild(activeLevel);

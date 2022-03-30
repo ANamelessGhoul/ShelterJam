@@ -100,6 +100,7 @@ public class CharacterSelection : Node2D
 			{
 				// Cast the skill, actually
 				_sounds.PlaySound("CastSpell");
+				_sounds.StopPlaying("Elinde_Ates_Var");
 				_gameSpace.SpendEnergy(skillEnergyCost);
 				_gameSpace.SpeedupMap.SetTiles(positionsToApplySkill, _selectedCharacter.SkillId);
 				_selectedCharacter.DieOnSkillCast();

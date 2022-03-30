@@ -46,7 +46,7 @@
 0/z_index = 0
 
 [sub_resource type="TileSet" id=2]
-0/name = "WhiteTile.png 0"
+0/name = "Speedup"
 0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 0.0784314, 0.780392, 0.858824, 1 )

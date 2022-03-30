@@ -99,7 +99,7 @@ public class CharacterSelection : Node2D
 				_sounds.PlaySound("CastSpell");
 				_sounds.StopPlaying("Elinde_Ates_Var");
 				_gameSpace.SpendEnergy(skillEnergyCost);
-				_gameSpace.SkillMap.SetTiles(positionsToApplySkill, _selectedCharacter.SkillId);
+				_gameSpace.SkillMap.ApplySkills(rotatedSkills);
 				_selectedCharacter.DieOnSkillCast();
 			}
 			else

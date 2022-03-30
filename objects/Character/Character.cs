@@ -18,7 +18,6 @@ public class Character : Node2D
 	private bool _isSelected;
 
 	private Sprite _sprite;
-	private Sprite _outline;
 	private Sounds _sounds;
 	private Map _map;  // Any map
 	private GameSpace _gameSpace;

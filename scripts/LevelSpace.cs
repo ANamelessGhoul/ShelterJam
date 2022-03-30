@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public class GameSpace : Node2D
+public class LevelSpace : Node2D
 {
 	[Signal]
 	public delegate void LevelWon();

@@ -5,12 +5,12 @@ using System.Collections.Generic;
 public class CharacterSelection : Node2D
 {
 	private Sounds _sounds;
-	private GameSpace _gameSpace;
+	private LevelSpace _gameSpace;
 	private Character _selectedCharacter = null;
 
 	public override void _Ready() 
 	{
-		_gameSpace = GetParent<GameSpace>();
+		_gameSpace = GetParent<LevelSpace>();
 		_sounds = this.GetSingleton<Sounds>();
 
 		ConnectPlayerSignals();

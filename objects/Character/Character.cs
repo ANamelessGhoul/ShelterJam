@@ -21,7 +21,7 @@ public class Character : Node2D
 	private Sprite _sprite;
 	private Sounds _sounds;
 	private Map _map;  // Any map
-	private GameSpace _gameSpace;
+	private LevelSpace _gameSpace;
 	private PatternPreview _patternPreview;
 	private WalkHighlights _walkHighlights;
 
@@ -40,7 +40,7 @@ public class Character : Node2D
 		_walkHighlights = GetNode<WalkHighlights>("WalkHighlights");
 		_sprite = GetNode<Sprite>("Sprite");
 		//_outline = GetNode<Sprite>("Sprite/Outline");
-		_gameSpace = GetNode<GameSpace>("../..");
+		_gameSpace = GetNode<LevelSpace>("../..");
 
 		_sprite.Material = (Material)_sprite.Material.Duplicate();
 

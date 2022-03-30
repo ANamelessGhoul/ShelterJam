@@ -6,12 +6,12 @@ public class SceneManager : Node2D
 	[Export]
 	public int levelIndex = 1;
 
-	private GameSpace activeLevel = null;
+	private LevelSpace activeLevel = null;
 
 	public override void _Ready()
 	{
 		PackedScene x = (PackedScene)GD.Load($"res://scenes/Level{levelIndex}.tscn");
-		activeLevel = x.Instance<GameSpace>();
+		activeLevel = x.Instance<LevelSpace>();
 		activeLevel.Connect("LevelWon", this, nameof(LoadNextLevel));
 		AddChild(activeLevel);
 	}
@@ -39,7 +39,7 @@ public class SceneManager : Node2D
 		levelIndex = level;
 		activeLevel.QueueFree();
 		PackedScene x = (PackedScene)GD.Load($"res://scenes/Level{level}.tscn");
-		activeLevel = x.Instance<GameSpace>();
+		activeLevel = x.Instance<LevelSpace>();
 		activeLevel.Connect("LevelWon", this, nameof(LoadNextLevel));
 		AddChild(activeLevel);
 	}

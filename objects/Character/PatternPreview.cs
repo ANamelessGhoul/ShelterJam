@@ -40,7 +40,7 @@ public class PatternPreview : Node2D
 		QuarterRotations += quarters;
 	}
 
-	public void ShowPreview(Resource deathPattern, GameSpace space, Vector2 mapIndex)
+	public void ShowPreview(Resource deathPattern, LevelSpace space, Vector2 mapIndex)
 	{
 		if (deathPattern == null)
 		{
@@ -62,7 +62,7 @@ public class PatternPreview : Node2D
 		IsShowing = true;
 	}
 
-	public void PlacePreviewAt(GameSpace space, string tileType, Vector2 position) 
+	public void PlacePreviewAt(LevelSpace space, string tileType, Vector2 position) 
 	{
 		var targetPosition = space.WalkableMap.GetWorldPosition(position);
 		var target = _targetSprite.Duplicate() as Sprite;

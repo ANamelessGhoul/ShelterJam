@@ -1,24 +1,48 @@
 extends Node
 
-export var includePivot: bool = true
+export (String, "None", "Speedup", "Revive", "Bounce", "WallBreak") \
+var pivotType: String
 
-export var savePath : String = "res://Pattern.tres"
+export (String, FILE) var savePath : String = "res://Pattern.tres"
+
+func add_group(skills: Dictionary, group: String):
+	if skills.has(group):
+		return
+	skills[group] = []
+
+func pivot_warning(pivot_positions: Array, pivot: Vector2):
+	if pivot_positions.size() > 1:
+		printerr("More than one pivot found. " + 
+			"Pivot found at %s will be used as pivot" % pivot + 
+			"and the others will be used as speedup tiles.")
 
 func _ready():
 	var tilemap: TileMap = $TileMap
 	var tile_set: TileSet = tilemap.tile_set
-	var pivotIndex = tile_set.find_tile_by_name("Pivot")
-	var tileIndex = tile_set.find_tile_by_name("Tile")
 	
+	var skills: Dictionary = {}
+	var pivot: Vector2 = Vector2.ZERO
 	
-	var pivot = tilemap.get_used_cells_by_id(pivotIndex)[0]
-	var positions = tilemap.get_used_cells_by_id(tileIndex)
+	for tile_id in tile_set.get_tiles_ids():
+		var tile_name = tile_set.tile_get_name(tile_id)
+		if tile_name == "Pivot":
+			var pivot_positions = tilemap.get_used_cells_by_id(tile_id)
+			pivot = pivot_positions[0]
+			pivot_warning(pivot_positions, pivot)
+			
+			if pivotType != "None":
+				add_group(skills, pivotType)
+				skills[pivotType].append_array(pivot_positions)
+		else:
+			add_group(skills, tile_name)
+			var positions = tilemap.get_used_cells_by_id(tile_id)
+			skills[tile_name].append_array(positions)
+		
 	
-	if includePivot:
-		positions.append(pivot)
+
 	
 	var patternResource = DeathPattern.new()
-	patternResource.positions = positions
+	patternResource.skills = skills
 	patternResource.origin = pivot
 	
 	var e = ResourceSaver.save(savePath, patternResource)

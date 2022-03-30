@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System.Collections.Generic;
+using GodotDictionary = Godot.Collections.Dictionary;
 
 public class PatternPreview : Node2D
 {
@@ -10,26 +11,33 @@ public class PatternPreview : Node2D
 	public Color nonPlaceableColor = Colors.Red;
 
 	public bool IsShowing { get; private set; } = false;
+	
+	private int _rotations = 0;
+	public int QuarterRotations 
+	{ 
+		get => _rotations;
+		private set 
+		{
+			while (value < 0)
+				value += 4;
+			value %= 4;
+			_rotations = value;
+		} 
+	}
 
-    private Sprite _targetSprite;
-    private Node2D _targetParent;
+	private Sprite _targetSprite;
+	private Node2D _targetParent;
 
-	private int rotations = 0;
-
-    public override void _Ready()
-    {
-        _targetSprite = GetNode<Sprite>("PatternSprite");
-        _targetParent = GetNode<Node2D>("PatternParent");
+	public override void _Ready()
+	{
+		_targetSprite = GetNode<Sprite>("PatternSprite");
+		_targetParent = GetNode<Node2D>("PatternParent");
 
 	}
 
-	public void RotateClockwise(int quarters) 
+	public void RotateClockwise(int quarters)
 	{
-		rotations += quarters;
-		while (rotations < 0)
-			rotations += 4;
-		rotations %= 4;
-
+		QuarterRotations += quarters;
 	}
 
 	public void ShowPreview(Resource deathPattern, GameSpace space, Vector2 mapIndex)
@@ -40,46 +48,38 @@ public class PatternPreview : Node2D
 			return;
 		}
 
-        var rotatedPositons = GetRotatedMapIndexes(deathPattern, mapIndex);
+		var rotatedSkills = deathPattern.Call("get_skills_rotated", QuarterRotations, mapIndex) as GodotDictionary;
 
-        foreach (Vector2 position in rotatedPositons)
+		foreach (string skill in rotatedSkills.Keys) 
 		{
-			var targetPosition = space.WalkableMap.GetWorldPosition(position);
-			var target = _targetSprite.Duplicate() as Sprite;
-
-			var isOnObstruction = space.ObstructionMap.TileExistsAt(position);
-			var isOnWalkable = space.WalkableMap.TileExistsAt(position);
-			var isPlaceable = !isOnObstruction && isOnWalkable;
-
-			target.Modulate = isPlaceable ? placeableColor : nonPlaceableColor;
-			target.Visible = true;
-			_targetParent.AddChild(target);
-			target.GlobalPosition = targetPosition;
+			var skillPositions = rotatedSkills[skill] as Array;
+			foreach (Vector2 position in skillPositions)
+			{
+				PlacePreviewAt(space, skill, position);
+			}
 		}
 
 		IsShowing = true;
 	}
 
-    public List<Vector2> GetRotatedMapIndexes(Resource deathPattern, Vector2 characterIndex)
-    {
-		var rotatedPositions = new List<Vector2>();
-        var positions = deathPattern.Get("positions") as Array;
-		var origin = (Vector2)deathPattern.Get("origin");
+	public void PlacePreviewAt(GameSpace space, string tileType, Vector2 position) 
+	{
+		var targetPosition = space.WalkableMap.GetWorldPosition(position);
+		var target = _targetSprite.Duplicate() as Sprite;
 
-		foreach (Vector2 position in positions)
-		{
-			var targetOffset = position - origin;
-			for (int i = 0; i < rotations; i++)
-				targetOffset = new Vector2(-targetOffset.y, targetOffset.x);
-			rotatedPositions.Add(targetOffset + characterIndex);
-		}
+		var isOnObstruction = space.ObstructionMap.TileExistsAt(position);
+		var isOnWalkable = space.WalkableMap.TileExistsAt(position);
+		var isPlaceable = !isOnObstruction && isOnWalkable;
 
-		return rotatedPositions;
+		target.Modulate = isPlaceable ? placeableColor : nonPlaceableColor;
+		target.Visible = true;
+		_targetParent.AddChild(target);
+		target.GlobalPosition = targetPosition;
 	}
 
-    public void HidePreview()
+	public void HidePreview()
 	{
-		foreach (Node2D child in _targetParent.GetChildren()) 
+		foreach (Node2D child in _targetParent.GetChildren())
 		{
 			child.QueueFree();
 		}

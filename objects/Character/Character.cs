@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using GodotDictionary = Godot.Collections.Dictionary;
 
 public class Character : Node2D
 {
@@ -94,10 +95,9 @@ public class Character : Node2D
 		QueueFree();
 	}
 
-	public List<Vector2> GetRotatedIndexes()
+	public GodotDictionary GetRotatedSkills()
 	{
-		List<Vector2> indexes = _patternPreview.GetRotatedMapIndexes(pattern, MapIndex);
-		return indexes;
+		return pattern.Call("get_skills_rotated", _patternPreview.QuarterRotations, MapIndex) as GodotDictionary;
 	}
 
 	public bool TryMoveToMapIndex(Vector2 targetMapIndex) 

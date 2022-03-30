@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class CharacterSelection : Node2D
 {
@@ -82,7 +83,15 @@ public class CharacterSelection : Node2D
 			}
 
 			// Apply Cast
-			var positionsToApplySkill = _selectedCharacter.GetRotatedIndexes();
+			var rotatedSkills = _selectedCharacter.GetRotatedSkills();
+			var positionsToApplySkill = new List<Vector2>();
+			foreach (string key in rotatedSkills.Keys) 
+			{
+				foreach (Vector2 position in rotatedSkills[key] as Godot.Collections.Array) 
+				{
+					positionsToApplySkill.Add(position);
+				}
+			}
 			var canCastSkill = true;
 			foreach (var position in positionsToApplySkill)
 			{
@@ -94,6 +103,7 @@ public class CharacterSelection : Node2D
 					break;
 				}
 			}
+
 
 
 			if (canCastSkill) 

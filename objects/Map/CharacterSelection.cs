@@ -92,27 +92,14 @@ public class CharacterSelection : Node2D
 					positionsToApplySkill.Add(position);
 				}
 			}
-			var canCastSkill = true;
-			foreach (var position in positionsToApplySkill)
-			{
-				var isOnObstruction = _gameSpace.ObstructionMap.TileExistsAt(position);
-				var isOnWalkable = _gameSpace.WalkableMap.TileExistsAt(position);
-				if (isOnObstruction || !isOnWalkable) 
-				{
-					canCastSkill = false;
-					break;
-				}
-			}
 
-
-
-			if (canCastSkill) 
+			if (CanCastSkills(rotatedSkills)) 
 			{
 				// Cast the skill, actually
 				_sounds.PlaySound("CastSpell");
 				_sounds.StopPlaying("Elinde_Ates_Var");
 				_gameSpace.SpendEnergy(skillEnergyCost);
-				_gameSpace.SpeedupMap.SetTiles(positionsToApplySkill, _selectedCharacter.SkillId);
+				_gameSpace.SkillMap.SetTiles(positionsToApplySkill, _selectedCharacter.SkillId);
 				_selectedCharacter.DieOnSkillCast();
 			}
 			else
@@ -127,7 +114,7 @@ public class CharacterSelection : Node2D
 		if (mapIndex == _selectedCharacter.MapIndex)
 			return;
 
-		var moveEnergyCost = _gameSpace.SpeedupMap.TileExistsAt(_selectedCharacter.MapIndex) ? 0 : 1;
+		var moveEnergyCost = _gameSpace.SkillMap.TileExistsAt(_selectedCharacter.MapIndex) ? 0 : 1;
 		var outOfEnergy = moveEnergyCost > _gameSpace.EnergyHandler.Energy;
 		if (outOfEnergy || !_selectedCharacter.TryMoveToMapIndex(mapIndex))
 		{
@@ -146,6 +133,25 @@ public class CharacterSelection : Node2D
 
 	}
 
+
+	public bool CanCastSkills(Godot.Collections.Dictionary skills) 
+	{
+		foreach (string key in skills.Keys)
+		{
+			foreach (Vector2 position in skills[key] as Godot.Collections.Array)
+			//foreach (var position in positionsToApplySkill)
+			{
+				var isOnObstruction = _gameSpace.ObstructionMap.TileExistsAt(position);
+				var isOnWalkable = _gameSpace.WalkableMap.TileExistsAt(position);
+				if (isOnObstruction || !isOnWalkable)
+				{
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
 	public void _on_Character_Selected(Character character) 
 	{
 		SelectCharacter(character);

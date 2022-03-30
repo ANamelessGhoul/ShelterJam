@@ -106,7 +106,7 @@ public class Character : Node2D
 			return false;
 
 		// Move
-		if (_gameSpace.SpeedupMap.TileExistsAt(targetMapIndex))
+		if (_gameSpace.SkillMap.TileExistsAt(targetMapIndex))
 			_sounds.PlaySound("WalkSpedUp");
 		else
 			_sounds.PlaySound("Walk");
@@ -132,7 +132,7 @@ public class Character : Node2D
 			return false;
 
 		// Energy checks
-		if (_gameSpace.SpeedupMap.TileExistsAt(MapIndex))
+		if (_gameSpace.SkillMap.TileExistsAt(MapIndex))
 		{
 			return true;
 		}

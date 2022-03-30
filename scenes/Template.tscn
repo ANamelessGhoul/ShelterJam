@@ -98,7 +98,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="SpeedupMap" type="TileMap" parent="."]
+[node name="SkillMap" type="TileMap" parent="."]
 z_index = -500
 mode = 1
 tile_set = SubResource( 2 )

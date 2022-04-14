@@ -62,16 +62,14 @@ public class PatternPreview : Node2D
 		IsShowing = true;
 	}
 
-	public void PlacePreviewAt(LevelSpace space, string tileType, Vector2 position) 
+	public void PlacePreviewAt(LevelSpace space, string skill, Vector2 position) 
 	{
 		var targetPosition = space.WalkableMap.GetWorldPosition(position);
 		var target = _targetSprite.Duplicate() as Sprite;
 
-		var isOnObstruction = space.ObstructionMap.TileExistsAt(position);
-		var isOnWalkable = space.WalkableMap.TileExistsAt(position);
-		var isPlaceable = !isOnObstruction && isOnWalkable;
+		var isPlaceable = space.SkillApplier.GetSkillCondition(skill);
 
-		target.Modulate = isPlaceable ? placeableColor : nonPlaceableColor;
+		target.Modulate = isPlaceable(position) ? placeableColor : nonPlaceableColor;
 		target.Visible = true;
 		_targetParent.AddChild(target);
 		target.GlobalPosition = targetPosition;

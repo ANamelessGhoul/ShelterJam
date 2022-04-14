@@ -8,7 +8,7 @@ public class CharacterSelection : Node2D
 	private LevelSpace _gameSpace;
 	private Character _selectedCharacter = null;
 
-	public override void _Ready() 
+	public override void _Ready()
 	{
 		_gameSpace = GetParent<LevelSpace>();
 		_sounds = this.GetSingleton<Sounds>();
@@ -16,12 +16,12 @@ public class CharacterSelection : Node2D
 		ConnectPlayerSignals();
 	}
 
-    private void ConnectPlayerSignals()
-    {
+	private void ConnectPlayerSignals()
+	{
 		GetTree().CallGroup("Character", "ConnectSignal", "Selected", this, "_on_Character_Selected");
-    }
+	}
 
-    public override void _UnhandledInput(InputEvent @event)
+	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (Input.IsActionJustPressed("click"))
 		{
@@ -36,11 +36,11 @@ public class CharacterSelection : Node2D
 			_sounds.StopPlaying("Elinde_Ates_Var");
 			DeselectCharacter();
 		}
-		else if (Input.IsActionJustPressed("use_skill")) 
+		else if (Input.IsActionJustPressed("use_skill"))
 		{
 			_sounds.PlaySound("RotateIndicator");
 			_sounds.StartPlaying("Elinde_Ates_Var");
-			if (_selectedCharacter != null && IsInstanceValid(_selectedCharacter)) 
+			if (_selectedCharacter != null && IsInstanceValid(_selectedCharacter))
 			{
 				_selectedCharacter.TogglePatternPreview();
 			}
@@ -75,37 +75,18 @@ public class CharacterSelection : Node2D
 
 		if (_selectedCharacter.IsShowingSkillPreview)
 		{
-			int skillEnergyCost = _selectedCharacter.SkillEnergyCost;
-			if (skillEnergyCost > _gameSpace.EnergyHandler.Energy) 
-			{
-				_sounds.PlaySound("CastingSpellFailed");
-				return;
-			}
+			bool didCast = _gameSpace.SkillApplier.TryApplyCharactersSkill(_selectedCharacter);
 
-			// Apply Cast
-			var rotatedSkills = _selectedCharacter.GetRotatedSkills();
-			var positionsToApplySkill = new List<Vector2>();
-			foreach (string key in rotatedSkills.Keys) 
+			if (didCast)
 			{
-				foreach (Vector2 position in rotatedSkills[key] as Godot.Collections.Array) 
-				{
-					positionsToApplySkill.Add(position);
-				}
-			}
-
-			if (CanCastSkills(rotatedSkills)) 
-			{
-				// Cast the skill, actually
 				_sounds.PlaySound("CastSpell");
 				_sounds.StopPlaying("Elinde_Ates_Var");
-				_gameSpace.SpendEnergy(skillEnergyCost);
-				_gameSpace.SkillMap.ApplySkills(rotatedSkills);
-				_selectedCharacter.DieOnSkillCast();
 			}
 			else
 			{
 				_sounds.PlaySound("CastingSpellFailed");
 			}
+
 			return;
 
 		}
@@ -127,32 +108,12 @@ public class CharacterSelection : Node2D
 
 		_gameSpace.PlayerMovedTo(mapIndex);
 
-
 		_gameSpace.SpendEnergy(moveEnergyCost);
-		
-
 	}
 
 
-	public bool CanCastSkills(Godot.Collections.Dictionary skills) 
-	{
-		foreach (string key in skills.Keys)
-		{
-			foreach (Vector2 position in skills[key] as Godot.Collections.Array)
-			//foreach (var position in positionsToApplySkill)
-			{
-				var isOnObstruction = _gameSpace.ObstructionMap.TileExistsAt(position);
-				var isOnWalkable = _gameSpace.WalkableMap.TileExistsAt(position);
-				if (isOnObstruction || !isOnWalkable)
-				{
-					return false;
-				}
-			}
-		}
 
-		return true;
-	}
-	public void _on_Character_Selected(Character character) 
+	public void _on_Character_Selected(Character character)
 	{
 		SelectCharacter(character);
 	}

@@ -1,27 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/Template.tscn" type="PackedScene" id=1]
-[ext_resource path="res://sprites/Flag.png" type="Texture" id=2]
-[ext_resource path="res://objects/Character/Character.cs" type="Script" id=3]
-[ext_resource path="res://objects/Flag/Flag.cs" type="Script" id=4]
-[ext_resource path="res://patterns/Pattern.tres" type="Resource" id=5]
 [ext_resource path="res://objects/Character/Character.tscn" type="PackedScene" id=11]
 [ext_resource path="res://objects/Flag/Flag.tscn" type="PackedScene" id=12]
 
 [node name="GameSpace" instance=ExtResource( 1 )]
 
-[node name="Character" type="Node2D" parent="ObstructionMap" index="1" groups=["Character"] instance=ExtResource( 11 )]
+[node name="Character" parent="ObstructionMap" index="1" instance=ExtResource( 11 )]
 position = Vector2( 210, 154 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
-pattern = ExtResource( 5 )
-SkillEnergyCost = 1
 
-[node name="Flag" type="Sprite" parent="ObstructionMap" index="2" instance=ExtResource( 12 )]
+[node name="Flag" parent="ObstructionMap" index="2" instance=ExtResource( 12 )]
 position = Vector2( 280, 119 )
-texture = ExtResource( 2 )
-centered = false
-offset = Vector2( -9, -14 )
-script = ExtResource( 4 )

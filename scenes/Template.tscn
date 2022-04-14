@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://objects/Map/TileSets/ObjectObstructionMap.tres" type="TileSet" id=1]
 [ext_resource path="res://sprites/WhiteTile.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://objects/Map/ObstructionMap.cs" type="Script" id=8]
 [ext_resource path="res://wellbutrin.regular.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://scripts/LevelSpace.cs" type="Script" id=10]
+[ext_resource path="res://objects/SkillApplier.cs" type="Script" id=11]
 [ext_resource path="res://sprites/UserInterface.png" type="Texture" id=14]
 [ext_resource path="res://objects/Map/MapEditor.gd" type="Script" id=17]
 
@@ -70,6 +71,9 @@ script = ExtResource( 10 )
 
 [node name="CharacterSelection" type="Node2D" parent="."]
 script = ExtResource( 3 )
+
+[node name="SkillApplier" type="Node" parent="."]
+script = ExtResource( 11 )
 
 [node name="WalkableMap" type="TileMap" parent="."]
 z_index = -500

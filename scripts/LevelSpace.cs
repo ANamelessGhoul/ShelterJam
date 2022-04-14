@@ -16,6 +16,8 @@ public class LevelSpace : Node2D
 	public Map VisualMap { get; private set; }
     public EnergyHandler EnergyHandler { get; private set; }
 
+	public SkillApplier SkillApplier { get; private set; }
+
 	public override void _Ready()
 	{
 		this.GetSingleton<GameManager>().State = GameManager.GameState.OnGoing;
@@ -25,6 +27,7 @@ public class LevelSpace : Node2D
 		WalkableMap = GetNode<Map>("WalkableMap");
 		VisualMap = GetNode<Map>("VisualMap");
 		EnergyHandler = GetNode<EnergyHandler>("EnergyHandler");
+		SkillApplier = GetNode<SkillApplier>("SkillApplier");
 	}
 
 	public void SpendEnergy(int skillCost)

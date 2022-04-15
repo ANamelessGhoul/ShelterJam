@@ -7,6 +7,7 @@ render_mode unshaded;
 uniform int intensity = 50;
 uniform float precision : hint_range(0,0.02);
 uniform bool flipColors;		//Flip coloring 90 degrees.
+uniform bool fourWay = false;
 
 //If not using a texture, will blend between these two colors
 uniform vec4 outline_color : hint_color;
@@ -52,6 +53,9 @@ void fragment()
 				
 				//Get the X and Y offset from this
 				if (x==0 && y==0)
+					continue;
+				
+				if (fourWay && (x==y || x==-y))
 					continue;
 					
 				vec2 outline_uv = regular_uv + vec2(float(x) * ps.x, float(y) * ps.y); 

@@ -6,8 +6,9 @@
 shader = ExtResource( 1 )
 shader_param/intensity = 0
 shader_param/precision = 0.02
-shader_param/flipColors = null
+shader_param/flipColors = false
+shader_param/fourWay = true
 shader_param/outline_color = Color( 1, 1, 1, 1 )
 shader_param/outline_color_2 = Color( 1, 1, 1, 1 )
-shader_param/use_outline_uv = null
-shader_param/useTexture = null
+shader_param/use_outline_uv = false
+shader_param/useTexture = false

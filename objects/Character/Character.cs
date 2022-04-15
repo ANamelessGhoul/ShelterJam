@@ -19,6 +19,7 @@ public class Character : Node2D
 	private bool _isSelected;
 
 	private Sprite _sprite;
+	private ShaderMaterial _material;
 	private Sounds _sounds;
 	private Map _map;  // Any map
 	private LevelSpace _gameSpace;
@@ -39,10 +40,10 @@ public class Character : Node2D
 		_patternPreview = GetNode<PatternPreview>("PatternPreview");
 		_walkHighlights = GetNode<WalkHighlights>("WalkHighlights");
 		_sprite = GetNode<Sprite>("Sprite");
-		//_outline = GetNode<Sprite>("Sprite/Outline");
 		_gameSpace = GetNode<LevelSpace>("../..");
 
-		_sprite.Material = (Material)_sprite.Material.Duplicate();
+		_material = (ShaderMaterial)_sprite.Material.Duplicate();
+		_sprite.Material = _material;
 
 		CallDeferred(nameof(GetMapIndex));
 	}
@@ -152,7 +153,7 @@ public class Character : Node2D
 	public void Select()
 	{
 		EmitSignal(nameof(Selected), this);
-		(_sprite.Material as ShaderMaterial).SetShaderParam("intensity", 50);
+		_material.SetShaderParam("intensity", 50);
 		//_outline.Visible = true;
 		_isSelected = true;
 		ShowWalkHighlights();
@@ -162,7 +163,7 @@ public class Character : Node2D
 	{
 		HidePatternPreview();
 		_isSelected = false;
-		(_sprite.Material as ShaderMaterial).SetShaderParam("intensity", 0);
+		_material.SetShaderParam("intensity", 0);
 		//_outline.Visible = false;
 		HideWalkHighlights();
 	}

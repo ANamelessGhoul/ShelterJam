@@ -48,7 +48,7 @@ public class Character : Node2D
 		CallDeferred(nameof(GetMapIndex));
 	}
 
-	private void GetMapIndex()
+    private void GetMapIndex()
 	{
 		_map = _gameSpace.VisualMap;
 		MapIndex = _map.GetMapIndex(GlobalPosition);
@@ -84,16 +84,17 @@ public class Character : Node2D
 
 	public void DieOnSkillCast()
 	{
-		var death = GetNode("Death") as Node2D;
-		var deathAnimation = death.GetNode("AnimatedSprite") as AnimatedSprite;
-		deathAnimation.Playing = true;
-		deathAnimation.Visible = true;
-		var timer = death.GetNode("Timer") as Timer;
-		RemoveChild(death);
-		GetParent().AddChild(death);
-		death.GlobalPosition = GlobalPosition;
-		timer.Start();
-		QueueFree();
+		_gameSpace.CharacterSelection.DeselectCharacter();
+		var corpse = GetNode<Corpse>("Corpse");
+		RemoveChild(corpse);
+		GetParent().AddChild(corpse);
+		corpse.Initialize(this, _map);
+		GetParent().RemoveChild(this);
+	}
+
+	public void Revive()
+	{
+		HidePatternPreview();
 	}
 
 	public GodotDictionary GetRotatedSkills()
@@ -115,6 +116,12 @@ public class Character : Node2D
 		MapIndex = targetMapIndex;
 		GlobalPosition = _map.GetWorldPosition(MapIndex);
 		return true;
+	}
+
+	public void WarpToMapIndex(Vector2 mapIndex) 
+	{
+		MapIndex = mapIndex;
+		GlobalPosition = _map.GetWorldPosition(MapIndex);
 	}
 
 	public bool CanMoveToMapIndex(Vector2 targetMapIndex)

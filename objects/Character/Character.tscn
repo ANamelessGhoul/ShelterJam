@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://objects/Character/Character.cs" type="Script" id=1]
 [ext_resource path="res://objects/Character/CharacterInput.cs" type="Script" id=2]
@@ -8,11 +8,26 @@
 [ext_resource path="res://sprites/Character/sprite1.png" type="Texture" id=6]
 [ext_resource path="res://shaders/OutlineMaterial.tres" type="Material" id=7]
 [ext_resource path="res://objects/Character/WalkHighlights.cs" type="Script" id=8]
+[ext_resource path="res://sprites/Character/sprite2.png" type="Texture" id=9]
+[ext_resource path="res://objects/Character/CharacterSprite.cs" type="Script" id=10]
 [ext_resource path="res://objects/Corpse/Corpse.tscn" type="PackedScene" id=15]
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 7.0
 height = 8.0
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "New Anim",
+"speed": 1.0
+} ]
 
 [node name="Character" type="Node2D" groups=["Character"]]
 script = ExtResource( 1 )
@@ -46,12 +61,22 @@ visible = false
 texture = ExtResource( 3 )
 offset = Vector2( 1, 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="OldSprite" type="Sprite" parent="."]
+visible = false
 material = ExtResource( 7 )
 position = Vector2( 0, -8 )
 texture = ExtResource( 6 )
 offset = Vector2( 0.5, 0.5 )
 region_rect = Rect2( 0, 0, 27, 27 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+material = ExtResource( 7 )
+position = Vector2( 0, -8 )
+frames = SubResource( 3 )
+animation = "New Anim"
+playing = true
+offset = Vector2( 0.5, 0.5 )
+script = ExtResource( 10 )
 
 [node name="WalkHighlights" type="Node2D" parent="."]
 z_index = 1

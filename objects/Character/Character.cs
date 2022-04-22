@@ -18,7 +18,7 @@ public class Character : Node2D
 
 	private bool _isSelected;
 
-	private Sprite _sprite;
+	private AnimatedSprite _sprite;
 	private ShaderMaterial _material;
 	private Sounds _sounds;
 	private Map _map;  // Any map
@@ -39,7 +39,7 @@ public class Character : Node2D
 		_sounds = this.GetSingleton<Sounds>();
 		_patternPreview = GetNode<PatternPreview>("PatternPreview");
 		_walkHighlights = GetNode<WalkHighlights>("WalkHighlights");
-		_sprite = GetNode<Sprite>("Sprite");
+		_sprite = GetNode<AnimatedSprite>("Sprite");
 		_gameSpace = GetNode<LevelSpace>("../..");
 
 		_material = (ShaderMaterial)_sprite.Material.Duplicate();

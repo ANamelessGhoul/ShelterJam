@@ -3,7 +3,10 @@ using System;
 
 public class Corpse : Node2D
 {
-	private Vector2 _mapIndex = Vector2.Zero;
+	public bool IsActive { get; private set; } = false;
+    public Vector2 MapIndex { get; private set; } = Vector2.Zero;
+
+
 	private Map _map = null;
 	private Character _livingForm;
 	private AnimatedSprite _animation;
@@ -26,9 +29,10 @@ public class Corpse : Node2D
 
 	public void Initialize(Character livingForm, Map map)
 	{
+		IsActive = true;
 		Visible = true;
 		_livingForm = livingForm;
-		_mapIndex = _livingForm.MapIndex;
+		MapIndex = _livingForm.MapIndex;
 		_map = map;
 		UpdatePosition();
 		ShowAnimation();
@@ -43,19 +47,20 @@ public class Corpse : Node2D
 
 	public void ReviveAnimCallback() 
 	{
+		IsActive = false;
 		Visible = false;
 		Node parent = GetParent();
 		parent.AddChild(_livingForm);
 		parent.RemoveChild(this);
 		_livingForm.AddChild(this);
 
-		_livingForm.WarpToMapIndex(_mapIndex);
+		_livingForm.WarpToMapIndex(MapIndex);
 		_livingForm.Revive();
 	}
 
 	public void UpdatePosition()
 	{
-		GlobalPosition = _map.GetWorldPosition(_mapIndex);
+		GlobalPosition = _map.GetWorldPosition(MapIndex);
 	}
 
 	public void ShowAnimation()

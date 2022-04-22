@@ -25,7 +25,8 @@ public class SkillApplier : Node
 		{
 			{ "Speedup",  IsTileWalkable },
 			{ "Bounce",  IsTileWalkable },
-			{ "WallBreak", (x) => _levelSpace.WalkableMap.TileExistsAt(x)}
+			{ "WallBreak", (x) => _levelSpace.WalkableMap.TileExistsAt(x)},
+			{ "Revive", (x) => { return ReviveSkill.CanCast(GetTree(), x); } }
 		};
 	}
 
@@ -34,7 +35,9 @@ public class SkillApplier : Node
 		actions = new Dictionary<string, Action<Vector2>>
 		{
 			{ "Speedup", (x) => _levelSpace.SkillMap.SetTile(x, "Speedup")},
-			{ "WallBreak", (x) => _levelSpace.ObstructionMap.SetCellv(x, -1)}
+			{ "WallBreak", (x) => _levelSpace.ObstructionMap.SetCellv(x, -1)},
+			{ "Revive", (x) => { ReviveSkill.Cast(GetTree(), x); } }
+
 		};
 	}
 

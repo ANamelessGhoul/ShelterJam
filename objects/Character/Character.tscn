@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://objects/Character/Character.cs" type="Script" id=1]
 [ext_resource path="res://objects/Character/CharacterInput.cs" type="Script" id=2]
@@ -8,25 +8,11 @@
 [ext_resource path="res://sprites/Character/sprite1.png" type="Texture" id=6]
 [ext_resource path="res://shaders/OutlineMaterial.tres" type="Material" id=7]
 [ext_resource path="res://objects/Character/WalkHighlights.cs" type="Script" id=8]
-[ext_resource path="res://objects/Character/Death.cs" type="Script" id=9]
-[ext_resource path="res://sprites/Character/anim/sprite17.png" type="Texture" id=10]
-[ext_resource path="res://sprites/Character/anim/sprite18.png" type="Texture" id=11]
-[ext_resource path="res://sprites/Character/anim/sprite14.png" type="Texture" id=12]
-[ext_resource path="res://sprites/Character/anim/sprite15.png" type="Texture" id=13]
-[ext_resource path="res://sprites/Character/anim/sprite16.png" type="Texture" id=14]
 [ext_resource path="res://objects/Corpse/Corpse.tscn" type="PackedScene" id=15]
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 7.0
 height = 8.0
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 11 ) ],
-"loop": true,
-"name": "Death",
-"speed": 5.0
-} ]
 
 [node name="Character" type="Node2D" groups=["Character"]]
 script = ExtResource( 1 )
@@ -101,24 +87,10 @@ position = Vector2( 14, 7 )
 texture = ExtResource( 3 )
 offset = Vector2( 1, 1 )
 
-[node name="Death" type="Node2D" parent="."]
-script = ExtResource( 9 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Death"]
-visible = false
-position = Vector2( 0, -2 )
-frames = SubResource( 1 )
-animation = "Death"
-offset = Vector2( 1, -2.5 )
-
-[node name="Timer" type="Timer" parent="Death"]
-wait_time = 0.599
-
-[node name="Corpse" parent="." instance=ExtResource( 15 )]
+[node name="Corpse" parent="." groups=["Corpse"] instance=ExtResource( 15 )]
 visible = false
 
 [connection signal="Clicked" from="Input" to="." method="_on_Area2D_Clicked"]
 [connection signal="input_event" from="Input" to="Input" method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="Input" to="Input" method="_on_Input_mouse_entered"]
 [connection signal="mouse_exited" from="Input" to="Input" method="_on_Input_mouse_exited"]
-[connection signal="timeout" from="Death/Timer" to="Death" method="_on_Timer_timeout"]

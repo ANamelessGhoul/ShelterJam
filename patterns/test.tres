@@ -7,7 +7,7 @@ script = ExtResource( 1 )
 origin = Vector2( 0, 0 )
 skills = {
 "Bounce": [  ],
-"Revive": [  ],
-"Speedup": [ Vector2( 0, 0 ), Vector2( 0, -2 ), Vector2( 0, -1 ) ],
-"WallBreak": [ Vector2( 0, -3 ) ]
+"Revive": [ Vector2( 0, -2 ) ],
+"Speedup": [ Vector2( 0, 0 ), Vector2( 0, -1 ) ],
+"WallBreak": [  ]
 }

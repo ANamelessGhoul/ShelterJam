@@ -1,3 +1,4 @@
+tool
 extends Node
 
 export (String, "None", "Speedup", "Revive", "Bounce", "WallBreak") \
@@ -5,18 +6,20 @@ var pivotType: String
 
 export (String, FILE) var savePath : String = "res://Pattern.tres"
 
-func add_group(skills: Dictionary, group: String):
-	if skills.has(group):
-		return
-	skills[group] = []
+export var run : bool setget _set_run
 
-func pivot_warning(pivot_positions: Array, pivot: Vector2):
-	if pivot_positions.size() > 1:
-		printerr("More than one pivot found. " + 
-			"Pivot found at %s will be used as pivot" % pivot + 
-			"and the others will be used as speedup tiles.")
+func _set_run(value):
+	run = false
+	property_list_changed_notify()
+	create_pattern()
 
 func _ready():
+	if Engine.editor_hint:
+		return
+	create_pattern()
+
+
+func create_pattern():
 	var tilemap: TileMap = $TileMap
 	var tile_set: TileSet = tilemap.tile_set
 	
@@ -48,3 +51,17 @@ func _ready():
 	var e = ResourceSaver.save(savePath, patternResource)
 	if e != OK:
 		print("Error %s" % e)
+	else:
+		print("Succesfully created pattern at %s" % savePath)
+
+func add_group(skills: Dictionary, group: String):
+	if skills.has(group):
+		return
+	skills[group] = []
+
+func pivot_warning(pivot_positions: Array, pivot: Vector2):
+	if pivot_positions.size() > 1:
+		printerr("More than one pivot found. " + 
+			"Pivot found at %s will be used as pivot" % pivot + 
+			"and the others will be used as speedup tiles.")
+

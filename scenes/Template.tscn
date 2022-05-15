@@ -150,4 +150,12 @@ custom_fonts/font = SubResource( 4 )
 text = "1"
 script = ExtResource( 7 )
 
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -48.0
+margin_bottom = 20.0
+text = "Reset"
+
 [connection signal="EnergyChanged" from="EnergyHandler" to="CanvasLayer/Label" method="_on_EnergyHandler_EnergyChanged"]
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_ResetButton_pressed"]

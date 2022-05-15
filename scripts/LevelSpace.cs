@@ -7,6 +7,9 @@ public class LevelSpace : Node2D
 	[Signal]
 	public delegate void LevelWon();
 
+	[Signal]
+	public delegate void ResetLevel();
+
 	public Vector2 flagIndex;
 
 	public CharacterSelection CharacterSelection { get; private set; }
@@ -65,7 +68,12 @@ public class LevelSpace : Node2D
 	{
 		if (mapIndex == flagIndex) 
 		{
-			EmitSignal("LevelWon");
+			EmitSignal(nameof(LevelWon));
 		}
+	}
+
+	public void _on_ResetButton_pressed() 
+	{
+		EmitSignal(nameof(ResetLevel));
 	}
 }

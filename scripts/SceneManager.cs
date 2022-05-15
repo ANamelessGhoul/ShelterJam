@@ -10,17 +10,20 @@ public class SceneManager : Node2D
 
 	public override void _Ready()
 	{
+		LoadLevel(levelIndex);
+		/*
 		PackedScene x = (PackedScene)GD.Load($"res://scenes/Level{levelIndex}.tscn");
 		activeLevel = x.Instance<LevelSpace>();
 		activeLevel.Connect("LevelWon", this, nameof(LoadNextLevel));
 		AddChild(activeLevel);
+		*/
 	}
 
 	public override void _Process(float delta)
 	{
 		if (Input.IsActionJustPressed("debug_reset_level")) 
 		{
-			LoadLevel(levelIndex);
+			ResetCurrentLevel();
 		}
 		if (Input.IsActionJustPressed("debug_reset_game")) 
 		{
@@ -37,15 +40,22 @@ public class SceneManager : Node2D
 	public void LoadLevel(int level) 
 	{
 		levelIndex = level;
-		activeLevel.QueueFree();
+		if (activeLevel != null)
+			activeLevel.QueueFree();
 		PackedScene x = (PackedScene)GD.Load($"res://scenes/Level{level}.tscn");
 		activeLevel = x.Instance<LevelSpace>();
 		activeLevel.Connect("LevelWon", this, nameof(LoadNextLevel));
+		activeLevel.Connect("ResetLevel", this, nameof(ResetCurrentLevel));
 		AddChild(activeLevel);
 	}
 
 	public void LoadNextLevel() 
 	{
 		LoadLevel(levelIndex + 1);
+	}
+
+	public void ResetCurrentLevel() 
+	{
+		LoadLevel(levelIndex);
 	}
 }

@@ -11,12 +11,6 @@ public class SceneManager : Node2D
 	public override void _Ready()
 	{
 		LoadLevel(levelIndex);
-		/*
-		PackedScene x = (PackedScene)GD.Load($"res://scenes/Level{levelIndex}.tscn");
-		activeLevel = x.Instance<LevelSpace>();
-		activeLevel.Connect("LevelWon", this, nameof(LoadNextLevel));
-		AddChild(activeLevel);
-		*/
 	}
 
 	public override void _Process(float delta)
@@ -27,6 +21,7 @@ public class SceneManager : Node2D
 		}
 		if (Input.IsActionJustPressed("debug_reset_game")) 
 		{
+			LoadLevel(1);
 		}
 		if (Input.IsActionJustPressed("debug_close_game"))
 		{

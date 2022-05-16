@@ -18,7 +18,6 @@ public class Character : Node2D
 	private bool _isSelected;
 
 	private CharacterSprite _sprite;
-	private ShaderMaterial _material;
 	private Sounds _sounds;
 	private Map _map;  // Any map
 	private LevelSpace _gameSpace;
@@ -38,8 +37,6 @@ public class Character : Node2D
 		_patternPreview = GetNode<PatternPreview>("PatternPreview");
 		_sprite = GetNode<CharacterSprite>("Sprite");
 		_gameSpace = GetNode<LevelSpace>("../..");
-
-		_material = (ShaderMaterial)_sprite.Material;
 
 		CallDeferred(nameof(GetMapIndex));
 	}

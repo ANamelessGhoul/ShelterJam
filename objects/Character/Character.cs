@@ -177,20 +177,25 @@ public class Character : Node2D
 
 	public void ShowWalkHighlights() 
 	{
-		var availableDirections = new bool[4];
+		var movements = new List<WalkPreview.WalkablePreviewTile>();
 		for (int i = 0; i < directions.Length; i++)
 		{
-			var target = directions[i] + MapIndex;
-			availableDirections[i] = CanMoveToMapIndex(target);
-			
+			var targetIndex = directions[i] + MapIndex;
+			var validMove = CanMoveToMapIndex(targetIndex);
+			var preview = new WalkPreview.WalkablePreviewTile()
+			{
+				Position = targetIndex,
+				State = validMove ? WalkPreview.WalkableState.Valid : WalkPreview.WalkableState.Invalid
+			};
+			movements.Add(preview);
 		}
 
-		_walkHighlights.ShowSides(availableDirections);
+		_gameSpace.WalkPreview.ShowPreview(this, movements);
 	}
 
 	public void HideWalkHighlights()
 	{
-		_walkHighlights.HideSides();
+		_gameSpace.WalkPreview.HidePreview(this);
 	}
 
 	public void TogglePatternPreview()

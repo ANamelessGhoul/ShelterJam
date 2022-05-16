@@ -20,6 +20,7 @@ public class LevelSpace : Node2D
     public EnergyHandler EnergyHandler { get; private set; }
 
 	public SkillApplier SkillApplier { get; private set; }
+	public WalkPreview WalkPreview { get; private set; }
 
 	public override void _Ready()
 	{
@@ -31,6 +32,7 @@ public class LevelSpace : Node2D
 		VisualMap = GetNode<Map>("VisualMap");
 		EnergyHandler = GetNode<EnergyHandler>("EnergyHandler");
 		SkillApplier = GetNode<SkillApplier>("SkillApplier");
+		WalkPreview = GetNode<WalkPreview>("WalkPreview");
 	}
 
 	public void SpendEnergy(int skillCost)

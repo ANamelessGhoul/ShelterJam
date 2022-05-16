@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://objects/Map/TileSets/ObjectObstructionMap.tres" type="TileSet" id=1]
 [ext_resource path="res://sprites/WhiteTile.png" type="Texture" id=2]
@@ -11,8 +11,12 @@
 [ext_resource path="res://wellbutrin.regular.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://objects/Level/LevelSpace.cs" type="Script" id=10]
 [ext_resource path="res://objects/Level/SkillApplier.cs" type="Script" id=11]
+[ext_resource path="res://objects/Level/WalkPreview.cs" type="Script" id=12]
 [ext_resource path="res://sprites/UserInterface.png" type="Texture" id=14]
 [ext_resource path="res://objects/Map/MapEditor.gd" type="Script" id=17]
+
+[sub_resource type="StreamTexture" id=6]
+load_path = "res://.import/WhiteTile.png-c95f1d14ca1fa43450b4c2c4bff32b2d.stex"
 
 [sub_resource type="TileSet" id=5]
 1/name = "FloorTile"
@@ -74,6 +78,23 @@ script = ExtResource( 3 )
 
 [node name="SkillApplier" type="Node" parent="."]
 script = ExtResource( 11 )
+
+[node name="WalkPreview" type="Node" parent="."]
+script = ExtResource( 12 )
+
+[node name="Valid" type="Sprite" parent="WalkPreview"]
+visible = false
+self_modulate = Color( 0.0784314, 0.780392, 0.858824, 0.501961 )
+z_index = 1
+texture = ExtResource( 2 )
+offset = Vector2( 1, 1 )
+
+[node name="Invalid" type="Sprite" parent="WalkPreview"]
+visible = false
+self_modulate = Color( 1, 0, 0, 0.501961 )
+z_index = 1
+texture = SubResource( 6 )
+offset = Vector2( 1, 1 )
 
 [node name="WalkableMap" type="TileMap" parent="."]
 z_index = -500

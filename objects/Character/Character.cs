@@ -42,8 +42,7 @@ public class Character : Node2D
 		_sprite = GetNode<AnimatedSprite>("Sprite");
 		_gameSpace = GetNode<LevelSpace>("../..");
 
-		_material = (ShaderMaterial)_sprite.Material.Duplicate();
-		_sprite.Material = _material;
+		_material = (ShaderMaterial)_sprite.Material;
 
 		CallDeferred(nameof(GetMapIndex));
 	}

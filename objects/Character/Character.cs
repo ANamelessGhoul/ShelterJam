@@ -13,7 +13,6 @@ public class Character : Node2D
 	[Export]
 	public int SkillEnergyCost;
 	public Vector2 MapIndex { get; private set; }
-	public int SkillId { get; private set; }
 	public bool IsShowingSkillPreview => _patternPreview.IsShowing;
 
 	private bool _isSelected;
@@ -24,7 +23,6 @@ public class Character : Node2D
 	private Map _map;  // Any map
 	private LevelSpace _gameSpace;
 	private PatternPreview _patternPreview;
-	private WalkHighlights _walkHighlights;
 
 	private readonly Vector2[] directions = new[]
 	{
@@ -38,7 +36,6 @@ public class Character : Node2D
 	{
 		_sounds = this.GetSingleton<Sounds>();
 		_patternPreview = GetNode<PatternPreview>("PatternPreview");
-		_walkHighlights = GetNode<WalkHighlights>("WalkHighlights");
 		_sprite = GetNode<CharacterSprite>("Sprite");
 		_gameSpace = GetNode<LevelSpace>("../..");
 

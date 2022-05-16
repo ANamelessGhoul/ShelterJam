@@ -66,7 +66,6 @@ material = ExtResource( 7 )
 position = Vector2( 0, -8 )
 frames = SubResource( 3 )
 animation = "New Anim"
-frame = 1
 playing = true
 offset = Vector2( 0.5, 0.5 )
 script = ExtResource( 10 )
@@ -110,5 +109,3 @@ visible = false
 
 [connection signal="Clicked" from="Input" to="." method="_on_Area2D_Clicked"]
 [connection signal="input_event" from="Input" to="Input" method="_on_Area2D_input_event"]
-[connection signal="mouse_entered" from="Input" to="Input" method="_on_Input_mouse_entered"]
-[connection signal="mouse_exited" from="Input" to="Input" method="_on_Input_mouse_exited"]

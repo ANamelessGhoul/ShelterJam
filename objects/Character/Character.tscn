@@ -65,7 +65,6 @@ material = ExtResource( 7 )
 position = Vector2( 0, -8 )
 frames = SubResource( 3 )
 animation = "New Anim"
-frame = 1
 playing = true
 offset = Vector2( 0.5, 0.5 )
 script = ExtResource( 10 )

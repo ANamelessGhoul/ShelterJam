@@ -108,6 +108,8 @@ public class Character : Node2D
 
 		MapIndex = targetMapIndex;
 		GlobalPosition = _map.GetWorldPosition(MapIndex);
+		HideWalkHighlights();
+		ShowWalkHighlights();
 		return true;
 	}
 

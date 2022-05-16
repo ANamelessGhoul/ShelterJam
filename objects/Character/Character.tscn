@@ -61,19 +61,12 @@ visible = false
 texture = ExtResource( 3 )
 offset = Vector2( 1, 1 )
 
-[node name="OldSprite" type="Sprite" parent="."]
-visible = false
-material = ExtResource( 7 )
-position = Vector2( 0, -8 )
-texture = ExtResource( 6 )
-offset = Vector2( 0.5, 0.5 )
-region_rect = Rect2( 0, 0, 27, 27 )
-
 [node name="Sprite" type="AnimatedSprite" parent="."]
 material = ExtResource( 7 )
 position = Vector2( 0, -8 )
 frames = SubResource( 3 )
 animation = "New Anim"
+frame = 1
 playing = true
 offset = Vector2( 0.5, 0.5 )
 script = ExtResource( 10 )

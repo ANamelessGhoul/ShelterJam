@@ -18,7 +18,7 @@ public class CharacterSelection : Node2D
 
 	private void ConnectPlayerSignals()
 	{
-		GetTree().CallGroup("Character", "ConnectSignal", "Selected", this, "_on_Character_Selected");
+		GetTree().CallGroup("Character", nameof(Character.ConnectSignal), nameof(Character.Selected), this, nameof(_on_Character_Selected));
 	}
 
 	public override void _UnhandledInput(InputEvent @event)

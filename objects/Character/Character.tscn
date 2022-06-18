@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://objects/Character/Character.cs" type="Script" id=1]
 [ext_resource path="res://objects/Character/CharacterInput.cs" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://objects/Character/PatternPreview.cs" type="Script" id=5]
 [ext_resource path="res://sprites/Character/sprite1.png" type="Texture" id=6]
 [ext_resource path="res://shaders/OutlineMaterial.tres" type="Material" id=7]
+[ext_resource path="res://sprites/Arrow.png" type="Texture" id=8]
 [ext_resource path="res://sprites/Character/sprite2.png" type="Texture" id=9]
 [ext_resource path="res://objects/Character/CharacterSprite.cs" type="Script" id=10]
 [ext_resource path="res://objects/Corpse/Corpse.tscn" type="PackedScene" id=15]
@@ -27,6 +28,23 @@ animations = [ {
 "name": "New Anim",
 "speed": 1.0
 } ]
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform float amplitude = 2.0;
+uniform float frequency = 2.0;
+
+void vertex()
+{
+	float offset = floor(sin(TIME * frequency) * amplitude) - amplitude;
+	VERTEX.y = VERTEX.y + offset;
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+shader_param/amplitude = 3.0
+shader_param/frequency = 2.0
 
 [node name="Character" type="Node2D" groups=["Character"]]
 script = ExtResource( 1 )
@@ -65,9 +83,17 @@ material = ExtResource( 7 )
 position = Vector2( 0, -8 )
 frames = SubResource( 3 )
 animation = "New Anim"
+frame = 1
 playing = true
 offset = Vector2( 0.5, 0.5 )
 script = ExtResource( 10 )
+
+[node name="Arrow" type="Sprite" parent="."]
+visible = false
+material = SubResource( 5 )
+position = Vector2( 0, -29 )
+texture = ExtResource( 8 )
+offset = Vector2( 0, 0.5 )
 
 [node name="Corpse" parent="." groups=["Corpse"] instance=ExtResource( 15 )]
 visible = false

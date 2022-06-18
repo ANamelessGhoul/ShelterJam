@@ -18,6 +18,7 @@ public class Character : Node2D
 	private bool _isSelected;
 
 	private CharacterSprite _sprite;
+	private Sprite _selectionArrow;
 	private Sounds _sounds;
 	private Map _map;  // Any map
 	private LevelSpace _gameSpace;
@@ -36,6 +37,7 @@ public class Character : Node2D
 		_sounds = this.GetSingleton<Sounds>();
 		_patternPreview = GetNode<PatternPreview>("PatternPreview");
 		_sprite = GetNode<CharacterSprite>("Sprite");
+		_selectionArrow = GetNode<Sprite>("Arrow");
 		_gameSpace = GetNode<LevelSpace>("../..");
 
 		CallDeferred(nameof(GetMapIndex));
@@ -157,6 +159,7 @@ public class Character : Node2D
 		EmitSignal(nameof(Selected), this);
 		_isSelected = true;
 		_sprite.HasOutline = true;
+		_selectionArrow.Visible = true;
 		ShowWalkHighlights();
 	}
 
@@ -165,6 +168,7 @@ public class Character : Node2D
 		HidePatternPreview();
 		_isSelected = false;
 		_sprite.HasOutline = false;
+		_selectionArrow.Visible = false;
 		HideWalkHighlights();
 	}
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://objects/Map/TileSets/ObjectObstructionMap.tres" type="TileSet" id=1]
 [ext_resource path="res://sprites/WhiteTile.png" type="Texture" id=2]
@@ -12,8 +12,9 @@
 [ext_resource path="res://objects/Level/LevelSpace.cs" type="Script" id=10]
 [ext_resource path="res://objects/Level/SkillApplier.cs" type="Script" id=11]
 [ext_resource path="res://objects/Level/WalkPreview.cs" type="Script" id=12]
-[ext_resource path="res://sprites/background.png" type="Texture" id=13]
+[ext_resource path="res://objects/Camera/CameraMovement.cs" type="Script" id=13]
 [ext_resource path="res://sprites/UserInterface.png" type="Texture" id=14]
+[ext_resource path="res://sprites/CubeWithSpace.png" type="Texture" id=15]
 [ext_resource path="res://objects/Map/MapEditor.gd" type="Script" id=17]
 
 [sub_resource type="StreamTexture" id=6]
@@ -34,6 +35,20 @@ load_path = "res://.import/WhiteTile.png-c95f1d14ca1fa43450b4c2c4bff32b2d.stex"
 1/shape_one_way_margin = 0.0
 1/shapes = [  ]
 1/z_index = 0
+2/name = "CubeWithSpace.png 2"
+2/texture = ExtResource( 15 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 0, 32, 32 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
 
 [sub_resource type="TileSet" id=1]
 0/name = "WhiteTile.png 0"
@@ -50,6 +65,20 @@ load_path = "res://.import/WhiteTile.png-c95f1d14ca1fa43450b4c2c4bff32b2d.stex"
 0/shape_one_way_margin = 0.0
 0/shapes = [  ]
 0/z_index = 0
+1/name = "CubeWithSpace.png 1"
+1/texture = ExtResource( 15 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 32, 32 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
 
 [sub_resource type="TileSet" id=2]
 0/name = "Speedup"
@@ -81,7 +110,6 @@ layer = -128
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-texture = ExtResource( 13 )
 stretch_mode = 2
 
 [node name="CharacterSelection" type="Node2D" parent="."]
@@ -166,6 +194,8 @@ Energy = 6
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 240, 135 )
+current = true
+script = ExtResource( 13 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://objects/Map/TileSets/ObjectObstructionMap.tres" type="TileSet" id=1]
 [ext_resource path="res://sprites/WhiteTile.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://objects/Level/LevelSpace.cs" type="Script" id=10]
 [ext_resource path="res://objects/Level/SkillApplier.cs" type="Script" id=11]
 [ext_resource path="res://objects/Level/WalkPreview.cs" type="Script" id=12]
+[ext_resource path="res://sprites/background.png" type="Texture" id=13]
 [ext_resource path="res://sprites/UserInterface.png" type="Texture" id=14]
 [ext_resource path="res://objects/Map/MapEditor.gd" type="Script" id=17]
 
@@ -73,6 +74,16 @@ font_data = ExtResource( 9 )
 [node name="GameSpace" type="Node2D"]
 script = ExtResource( 10 )
 
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = -128
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 13 )
+stretch_mode = 2
+
 [node name="CharacterSelection" type="Node2D" parent="."]
 script = ExtResource( 3 )
 
@@ -100,7 +111,7 @@ offset = Vector2( 1, 1 )
 z_index = -500
 mode = 1
 tile_set = SubResource( 5 )
-cell_size = Vector2( 28, 14 )
+cell_size = Vector2( 30, 14 )
 cell_custom_transform = Transform2D( 28, 0, 0, 14, 0, 0 )
 cell_tile_origin = 1
 format = 1
@@ -114,7 +125,7 @@ __meta__ = {
 z_index = -500
 mode = 1
 tile_set = SubResource( 1 )
-cell_size = Vector2( 28, 14 )
+cell_size = Vector2( 30, 14 )
 cell_custom_transform = Transform2D( 28, 0, 0, 14, 0, 0 )
 cell_tile_origin = 1
 format = 1
@@ -127,7 +138,7 @@ __meta__ = {
 z_index = -500
 mode = 1
 tile_set = SubResource( 2 )
-cell_size = Vector2( 28, 14 )
+cell_size = Vector2( 30, 14 )
 cell_custom_transform = Transform2D( 28, 0, 0, 14, 0, 0 )
 cell_tile_origin = 1
 format = 1
@@ -139,7 +150,7 @@ __meta__ = {
 [node name="ObstructionMap" type="TileMap" parent="."]
 mode = 1
 tile_set = ExtResource( 1 )
-cell_size = Vector2( 28, 14 )
+cell_size = Vector2( 30, 14 )
 cell_custom_transform = Transform2D( 28, 0, 0, 14, 0, 0 )
 cell_tile_origin = 1
 cell_y_sort = true

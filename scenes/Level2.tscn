@@ -7,16 +7,19 @@
 
 [node name="GameSpace" instance=ExtResource( 1 )]
 
+[node name="ObstructionMap" parent="." index="7"]
+cell_size = Vector2( 30, 14 )
+
 [node name="Character" parent="ObstructionMap" index="1" instance=ExtResource( 11 )]
-position = Vector2( 210, 154 )
+position = Vector2( 225, 154 )
 pattern = ExtResource( 13 )
 
 [node name="Flag" parent="ObstructionMap" index="2" instance=ExtResource( 12 )]
-position = Vector2( 280, 119 )
+position = Vector2( 300, 119 )
 
 [node name="Character2" parent="ObstructionMap" index="3" instance=ExtResource( 11 )]
-position = Vector2( 224, 147 )
+position = Vector2( 240, 147 )
 pattern = ExtResource( 13 )
 
-[node name="EnergyHandler" parent="." index="5"]
+[node name="EnergyHandler" parent="." index="8"]
 Energy = 2

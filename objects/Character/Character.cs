@@ -41,9 +41,9 @@ public class Character : Node2D
 		CallDeferred(nameof(GetMapIndex));
 	}
 
-    private void GetMapIndex()
+    public void GetMapIndex()
 	{
-		_map = _gameSpace.VisualMap;
+		_map = _gameSpace.ObstructionMap;
 		MapIndex = _map.GetMapIndex(GlobalPosition);
 		GlobalPosition = _map.GetWorldPosition(MapIndex);
 	}

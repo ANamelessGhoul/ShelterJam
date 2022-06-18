@@ -17,14 +17,6 @@ public class CameraMovement : Camera2D
             if (mouseButtonEvent.ButtonIndex == (int)ButtonList.Middle)
             {
                 _isMiddleMousePressed = mouseButtonEvent.Pressed;
-                if (_isMiddleMousePressed)
-                {
-                    GD.Print("Pressed");
-                }
-                else
-                {
-                    GD.Print("Released");
-                }
             }
         }
 

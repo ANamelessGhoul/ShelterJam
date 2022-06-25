@@ -31,6 +31,15 @@ public class SceneManager : Node2D
 		if (Input.IsActionJustPressed("mute_music")) { }
 		
 		// TODO: Next and Previous Level
+		if (Input.IsActionJustPressed("debug_next_level"))
+		{
+			LoadNextLevel();
+		}
+
+		if (Input.IsActionJustPressed("debug_previous_level"))
+		{
+			LoadLevel(levelIndex - 1);
+		}
 
 	}
 

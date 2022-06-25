@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://objects/Map/TileSets/ObjectObstructionMap.tres" type="TileSet" id=1]
 [ext_resource path="res://sprites/WhiteTile.png" type="Texture" id=2]
@@ -13,9 +13,15 @@
 [ext_resource path="res://objects/Level/SkillApplier.cs" type="Script" id=11]
 [ext_resource path="res://objects/Level/WalkPreview.cs" type="Script" id=12]
 [ext_resource path="res://objects/Camera/CameraMovement.cs" type="Script" id=13]
-[ext_resource path="res://sprites/UserInterface.png" type="Texture" id=14]
+[ext_resource path="res://sprites/UI/ActionPoints.png" type="Texture" id=14]
 [ext_resource path="res://sprites/CubeWithSpace.png" type="Texture" id=15]
+[ext_resource path="res://sprites/UI/ExtraFeatures.png" type="Texture" id=16]
 [ext_resource path="res://objects/Map/MapEditor.gd" type="Script" id=17]
+[ext_resource path="res://sprites/UI/Planning.png" type="Texture" id=18]
+[ext_resource path="res://sprites/UI/ButtonClockwise.png" type="Texture" id=20]
+[ext_resource path="res://sprites/UI/PlanButton.png" type="Texture" id=21]
+[ext_resource path="res://sprites/UI/ButtonCounterClockwise.png" type="Texture" id=22]
+[ext_resource path="res://sprites/UI/PlanButtonHighlighted.png" type="Texture" id=23]
 
 [sub_resource type="StreamTexture" id=6]
 load_path = "res://.import/WhiteTile.png-c95f1d14ca1fa43450b4c2c4bff32b2d.stex"
@@ -96,21 +102,28 @@ load_path = "res://.import/WhiteTile.png-c95f1d14ca1fa43450b4c2c4bff32b2d.stex"
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 20 )
+region = Rect2( 0, 0, 19, 19 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 20 )
+region = Rect2( 19, 0, 19, 19 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 22 )
+region = Rect2( 0, 0, 19, 19 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 22 )
+region = Rect2( 19, 0, 19, 19 )
+
 [sub_resource type="DynamicFont" id=4]
-size = 32
+size = 28
 font_data = ExtResource( 9 )
 
 [node name="GameSpace" type="Node2D"]
 script = ExtResource( 10 )
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-layer = -128
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-stretch_mode = 2
 
 [node name="CharacterSelection" type="Node2D" parent="."]
 script = ExtResource( 3 )
@@ -199,15 +212,64 @@ script = ExtResource( 13 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
+[node name="ActionPoints" type="TextureRect" parent="CanvasLayer"]
+margin_left = 24.0
+margin_top = 19.0
+margin_right = 144.0
+margin_bottom = 137.0
 texture = ExtResource( 14 )
 
+[node name="PlanButton" type="TextureButton" parent="CanvasLayer"]
+margin_left = 24.0
+margin_top = 89.0
+margin_right = 144.0
+margin_bottom = 137.0
+texture_normal = ExtResource( 21 )
+texture_pressed = ExtResource( 23 )
+texture_hover = ExtResource( 23 )
+texture_disabled = ExtResource( 21 )
+
+[node name="PlanningWindow" type="TextureRect" parent="CanvasLayer"]
+margin_left = 24.0
+margin_top = 137.0
+margin_right = 168.0
+margin_bottom = 251.0
+mouse_filter = 2
+texture = ExtResource( 18 )
+
+[node name="RotateCW" type="TextureButton" parent="CanvasLayer/PlanningWindow"]
+margin_left = 125.0
+margin_top = 29.0
+margin_right = 144.0
+margin_bottom = 48.0
+texture_normal = SubResource( 9 )
+texture_pressed = SubResource( 10 )
+texture_hover = SubResource( 10 )
+texture_disabled = SubResource( 9 )
+
+[node name="RotateCCW" type="TextureButton" parent="CanvasLayer/PlanningWindow"]
+margin_left = 125.0
+margin_top = 52.0
+margin_right = 144.0
+margin_bottom = 71.0
+texture_normal = SubResource( 11 )
+texture_pressed = SubResource( 12 )
+texture_hover = SubResource( 12 )
+texture_disabled = SubResource( 11 )
+
+[node name="ExtraFeatures" type="TextureRect" parent="CanvasLayer"]
+margin_left = 144.0
+margin_top = 167.0
+margin_right = 345.0
+margin_bottom = 251.0
+mouse_filter = 2
+texture = ExtResource( 16 )
+
 [node name="Label" type="Label" parent="CanvasLayer"]
-margin_right = 40.0
-margin_bottom = 44.0
+margin_left = 52.0
+margin_top = 21.0
+margin_right = 72.0
+margin_bottom = 60.0
 custom_fonts/font = SubResource( 4 )
 text = "1"
 script = ExtResource( 7 )

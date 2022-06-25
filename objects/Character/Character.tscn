@@ -76,7 +76,7 @@ z_index = 10
 [node name="PatternSprite" type="Sprite" parent="PatternPreview"]
 visible = false
 texture = ExtResource( 3 )
-offset = Vector2( 1, 1 )
+offset = Vector2( 0, 1 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 material = ExtResource( 7 )

@@ -139,14 +139,14 @@ visible = false
 self_modulate = Color( 0.0784314, 0.780392, 0.858824, 0.501961 )
 z_index = 1
 texture = ExtResource( 2 )
-offset = Vector2( 1, 1 )
+offset = Vector2( 0, 1 )
 
 [node name="Invalid" type="Sprite" parent="WalkPreview"]
 visible = false
 self_modulate = Color( 1, 0, 0, 0.501961 )
 z_index = 1
 texture = SubResource( 6 )
-offset = Vector2( 1, 1 )
+offset = Vector2( 0, 1 )
 
 [node name="WalkableMap" type="TileMap" parent="."]
 z_index = -500

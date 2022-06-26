@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://objects/Map/TileSets/ObjectObstructionMap.tres" type="TileSet" id=1]
 [ext_resource path="res://sprites/WhiteTile.png" type="Texture" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://sprites/UI/ExtraFeatures.png" type="Texture" id=16]
 [ext_resource path="res://objects/Map/MapEditor.gd" type="Script" id=17]
 [ext_resource path="res://sprites/UI/Planning.png" type="Texture" id=18]
+[ext_resource path="res://objects/ErrorText/ErrorText.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sprites/UI/ButtonClockwise.png" type="Texture" id=20]
 [ext_resource path="res://sprites/UI/PlanButton.png" type="Texture" id=21]
 [ext_resource path="res://sprites/UI/ButtonCounterClockwise.png" type="Texture" id=22]
@@ -128,6 +129,10 @@ script = ExtResource( 10 )
 [node name="CharacterSelection" type="Node2D" parent="."]
 script = ExtResource( 3 )
 
+[node name="EnergyHandler" type="Node" parent="."]
+script = ExtResource( 4 )
+Energy = 6
+
 [node name="SkillApplier" type="Node" parent="."]
 script = ExtResource( 11 )
 
@@ -200,10 +205,6 @@ script = ExtResource( 8 )
 
 [node name="MapEditor" type="Node" parent="ObstructionMap"]
 script = ExtResource( 17 )
-
-[node name="EnergyHandler" type="Node" parent="."]
-script = ExtResource( 4 )
-Energy = 6
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 240, 135 )
@@ -280,6 +281,8 @@ anchor_right = 1.0
 margin_left = -48.0
 margin_bottom = 20.0
 text = "Reset"
+
+[node name="ErrorText" parent="CanvasLayer" instance=ExtResource( 19 )]
 
 [connection signal="EnergyChanged" from="EnergyHandler" to="CanvasLayer/Label" method="_on_EnergyHandler_EnergyChanged"]
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_ResetButton_pressed"]

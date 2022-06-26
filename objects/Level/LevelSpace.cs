@@ -21,6 +21,7 @@ public class LevelSpace : Node2D
 
 	public SkillApplier SkillApplier { get; private set; }
 	public WalkPreview WalkPreview { get; private set; }
+	public ErrorText ErrorText { get; private set; }
 
 	public override void _Ready()
 	{
@@ -33,6 +34,7 @@ public class LevelSpace : Node2D
 		EnergyHandler = GetNode<EnergyHandler>("EnergyHandler");
 		SkillApplier = GetNode<SkillApplier>("SkillApplier");
 		WalkPreview = GetNode<WalkPreview>("WalkPreview");
+		ErrorText = GetNode<ErrorText>("CanvasLayer/ErrorText");
 	}
 
 	public void SpendEnergy(int skillCost)

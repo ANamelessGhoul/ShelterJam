@@ -99,4 +99,7 @@ offset = Vector2( 0, 0.5 )
 visible = false
 
 [connection signal="Clicked" from="Input" to="." method="_on_Area2D_Clicked"]
+[connection signal="HoverChanged" from="Input" to="." method="_on_Input_HoverChanged"]
 [connection signal="input_event" from="Input" to="Input" method="_on_Area2D_input_event"]
+[connection signal="mouse_entered" from="Input" to="Input" method="_on_Input_mouse_entered"]
+[connection signal="mouse_exited" from="Input" to="Input" method="_on_Input_mouse_exited"]

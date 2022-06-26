@@ -158,6 +158,7 @@ public class Character : Node2D
 	{
 		EmitSignal(nameof(Selected), this);
 		_isSelected = true;
+		_sprite.OutlineType = CharacterSprite.Outline.Full;
 		_sprite.HasOutline = true;
 		_selectionArrow.Visible = true;
 		ShowWalkHighlights();
@@ -222,5 +223,21 @@ public class Character : Node2D
 	private void _on_Area2D_Clicked() 
 	{
 		CallDeferred(nameof(Select));
+	}
+
+	private void _on_Input_HoverChanged(bool isHovering)
+	{
+		if (_isSelected)
+			return;
+
+		if (isHovering)
+		{
+			_sprite.OutlineType = CharacterSprite.Outline.Partial;
+			_sprite.HasOutline = true;
+		}
+		else
+		{
+			_sprite.HasOutline = false;
+		}
 	}
 }

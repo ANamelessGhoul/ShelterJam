@@ -5,7 +5,11 @@ public class CharacterInput : Area2D
 	[Signal]
 	public delegate void Clicked();
 
+	[Signal]
+	public delegate void HoverChanged(bool isHovering);
+
 	private bool _isClicked = false;
+
 
 	public override void _Process(float delta) 
 	{
@@ -41,4 +45,13 @@ public class CharacterInput : Area2D
 		GetTree().SetInputAsHandled();
 	}
 
+	private void _on_Input_mouse_entered()
+	{
+		EmitSignal(nameof(HoverChanged), true);
+	}
+
+	private void _on_Input_mouse_exited()
+	{
+		EmitSignal(nameof(HoverChanged), false);
+	}
 }

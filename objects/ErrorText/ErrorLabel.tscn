@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Kenney Pixel.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://objects/ErrorText/ErrorLabel.cs" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[node name="Label" type="Label"]
+margin_right = 23.0
+margin_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]

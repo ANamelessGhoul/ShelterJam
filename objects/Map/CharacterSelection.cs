@@ -85,6 +85,7 @@ public class CharacterSelection : Node2D
 			else
 			{
 				_sounds.PlaySound("CastingSpellFailed");
+				_gameSpace.ErrorText.ShowErrorTextAtPosition("Can't cast skill here", _selectedCharacter.GlobalPosition);
 			}
 
 			return;

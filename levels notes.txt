@@ -1,0 +1,15 @@
+Shamelessly putting my notes here so git can also take it in.
+
+// Some levels can be completed with extra energy remaining. This can become a game mechanic.
+Level Energy Overflows;
+Level0  : 0
+Level1  : 0
+Level2  : 1
+Level3  : 1
+Level4  : 0
+Level5  : 1
+Level6  : 0
+Level7  : 1
+Level8  : 3
+Level9  : 2
+Level10 : 0

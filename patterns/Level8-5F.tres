@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://scripts/DeathPattern.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+origin = Vector2( 8, 2 )
+skills = {
+"Bounce": [  ],
+"Revive": [  ],
+"Speedup": [ Vector2( 8, 2 ), Vector2( 8, -3 ), Vector2( 8, -2 ), Vector2( 8, -1 ), Vector2( 8, 0 ), Vector2( 8, 1 ) ],
+"WallBreak": [  ]
+}

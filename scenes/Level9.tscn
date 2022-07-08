@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://patterns/Level9-Spiral.tres" type="Resource" id=2]
+[ext_resource path="res://patterns/Level9-Tank.tres" type="Resource" id=3]
+[ext_resource path="res://objects/Flag/Flag.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Template.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/Character/Character.tscn" type="PackedScene" id=6]
+[ext_resource path="res://patterns/Level9-Circle.tres" type="Resource" id=9]
+[ext_resource path="res://patterns/Level9-1FWB.tres" type="Resource" id=10]
+
+[node name="GameSpace" instance=ExtResource( 5 )]
+
+[node name="WalkableMap" parent="." index="4"]
+tile_data = PoolIntArray( -589809, 1, 0, -589808, 1, 0, -589807, 1, 0, -524273, 1, 0, -524272, 1, 0, -524271, 1, 0, -458737, 1, 0, -458736, 1, 0, -458735, 1, 0, -393203, 1, 0, -393202, 1, 0, -393201, 1, 0, -393200, 1, 0, -393199, 1, 0, -393198, 1, 0, -393197, 1, 0, -327667, 1, 0, -327666, 1, 0, -327665, 1, 0, -327664, 1, 0, -327663, 1, 0, -327662, 1, 0, -327661, 1, 0, -262131, 1, 0, -262130, 1, 0, -262129, 1, 0, -262128, 1, 0, -262127, 1, 0, -262126, 1, 0, -262125, 1, 0, -196595, 1, 0, -196594, 1, 0, -196593, 1, 0, -196592, 1, 0, -196591, 1, 0, -196590, 1, 0, -196589, 1, 0, -131059, 1, 0, -131058, 1, 0, -131057, 1, 0, -131056, 1, 0, -131055, 1, 0, -131054, 1, 0, -131053, 1, 0, -65523, 1, 0, -65522, 1, 0, -65521, 1, 0, -65520, 1, 0, -65519, 1, 0, -65518, 1, 0, -65517, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0, 19, 1, 0, 65551, 1, 0, 65552, 1, 0, 65553, 1, 0, 131087, 1, 0, 131088, 1, 0, 131089, 1, 0, 196623, 1, 0, 196624, 1, 0, 196625, 1, 0 )
+
+[node name="SkillMap" parent="." index="6"]
+tile_data = PoolIntArray( -327665, 0, 0, -327664, 0, 0, -327663, 0, 0, -262129, 0, 0, -262127, 0, 0, -196593, 0, 0, -196592, 0, 0, -196591, 0, 0 )
+
+[node name="ObstructionMap" parent="." index="7"]
+tile_data = PoolIntArray( -524273, 2, 0, -524272, 2, 0, -524271, 2, 0 )
+
+[node name="Character" parent="ObstructionMap" index="1" instance=ExtResource( 6 )]
+position = Vector2( 285, 73 )
+pattern = ExtResource( 2 )
+
+[node name="Character2" parent="ObstructionMap" index="2" instance=ExtResource( 6 )]
+position = Vector2( 285, 101 )
+pattern = ExtResource( 9 )
+
+[node name="Character3" parent="ObstructionMap" index="3" instance=ExtResource( 6 )]
+position = Vector2( 331, 95 )
+pattern = ExtResource( 3 )
+
+[node name="Character4" parent="ObstructionMap" index="4" instance=ExtResource( 6 )]
+position = Vector2( 210, 133 )
+pattern = ExtResource( 10 )
+
+[node name="Flag2" parent="ObstructionMap" index="5" instance=ExtResource( 4 )]
+position = Vector2( 375, 56 )

@@ -19,4 +19,4 @@ position = Vector2( 225, 154 )
 position = Vector2( 360, 91 )
 
 [node name="TutorialText" parent="CanvasLayer" index="7"]
-text = "Blue is Speed"
+text = "Moving on blue, enhanced squeres do not cost energy."

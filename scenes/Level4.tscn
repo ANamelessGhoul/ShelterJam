@@ -30,4 +30,4 @@ pattern = ExtResource( 5 )
 position = Vector2( 345, 98 )
 
 [node name="TutorialText" parent="CanvasLayer" index="7"]
-text = "no Cost when leaving Speed"
+text = "Reminder: leaving the enhanced square doe not cost energy either."

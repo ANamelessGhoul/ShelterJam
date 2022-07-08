@@ -34,4 +34,4 @@ position = Vector2( 300, 133 )
 pattern = ExtResource( 2 )
 
 [node name="TutorialText" parent="CanvasLayer" index="7"]
-text = "Wall Break Skill"
+text = "One of splatters' skill breaks walls instead."

@@ -31,4 +31,4 @@ position = Vector2( 240, 105 )
 pattern = ExtResource( 9 )
 
 [node name="TutorialText" parent="CanvasLayer" index="7"]
-text = "Revive Skill"
+text = "One of splatters' skill can revive dead splatters."

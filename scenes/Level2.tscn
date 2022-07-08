@@ -20,3 +20,6 @@ position = Vector2( 300, 119 )
 [node name="Character2" parent="ObstructionMap" index="3" instance=ExtResource( 11 )]
 position = Vector2( 240, 147 )
 pattern = ExtResource( 13 )
+
+[node name="TutorialText" parent="CanvasLayer" index="7"]
+text = "Cast is Die and Speed"

@@ -284,5 +284,12 @@ text = "Reset"
 
 [node name="ErrorText" parent="CanvasLayer" instance=ExtResource( 19 )]
 
+[node name="TutorialText" type="Label" parent="CanvasLayer"]
+margin_left = 120.0
+margin_top = 7.0
+margin_right = 422.0
+margin_bottom = 46.0
+custom_fonts/font = SubResource( 4 )
+
 [connection signal="EnergyChanged" from="EnergyHandler" to="CanvasLayer/Label" method="_on_EnergyHandler_EnergyChanged"]
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_ResetButton_pressed"]

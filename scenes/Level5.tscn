@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Template.tscn" type="PackedScene" id=1]
+[ext_resource path="res://patterns/Level5-1F1R.tres" type="Resource" id=2]
 [ext_resource path="res://patterns/Level5-1F1L.tres" type="Resource" id=5]
 [ext_resource path="res://patterns/Level5-TetrisT.tres" type="Resource" id=6]
-[ext_resource path="res://patterns/Level5-1F.tres" type="Resource" id=7]
 [ext_resource path="res://objects/Character/Character.tscn" type="PackedScene" id=11]
 [ext_resource path="res://objects/Flag/Flag.tscn" type="PackedScene" id=12]
 
@@ -20,7 +20,7 @@ position = Vector2( 315, 112 )
 
 [node name="Character" parent="ObstructionMap" index="2" instance=ExtResource( 11 )]
 position = Vector2( 255, 154 )
-pattern = ExtResource( 7 )
+pattern = ExtResource( 2 )
 
 [node name="Character2" parent="ObstructionMap" index="3" instance=ExtResource( 11 )]
 position = Vector2( 240, 147 )

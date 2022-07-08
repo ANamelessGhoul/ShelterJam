@@ -22,4 +22,8 @@ position = Vector2( 240, 147 )
 pattern = ExtResource( 13 )
 
 [node name="TutorialText" parent="CanvasLayer" index="7"]
-text = "While a splatter is selected, press space to go into casting mode. Cast skills by left click, rotate by mouse wheel. They leave speed up area."
+margin_left = 126.0
+margin_top = 2.0
+margin_right = 428.0
+margin_bottom = 84.0
+text = "While a splatter is selected, press space to go into casting mode. Cast skills with left click, rotate with mouse wheel. They leave enhanced squares."

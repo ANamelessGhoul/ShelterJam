@@ -23,4 +23,4 @@ pattern = ExtResource( 2 )
 position = Vector2( 360, 147 )
 
 [node name="TutorialText" parent="CanvasLayer" index="7"]
-text = "Can't cast if the skills don't hit anywhere."
+text = "Can't cast if the skills don't hit on all of it's positions."

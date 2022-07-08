@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://objects/Map/TileSets/ObjectObstructionMap.tres" type="TileSet" id=1]
 [ext_resource path="res://sprites/WhiteTile.png" type="Texture" id=2]
@@ -120,7 +120,11 @@ atlas = ExtResource( 22 )
 region = Rect2( 19, 0, 19, 19 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 28
+size = 20
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 12
 font_data = ExtResource( 9 )
 
 [node name="GameSpace" type="Node2D"]
@@ -268,9 +272,9 @@ texture = ExtResource( 16 )
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 margin_left = 52.0
-margin_top = 21.0
+margin_top = 26.0
 margin_right = 72.0
-margin_bottom = 60.0
+margin_bottom = 55.0
 custom_fonts/font = SubResource( 4 )
 text = "1"
 script = ExtResource( 7 )
@@ -288,8 +292,9 @@ text = "Reset"
 margin_left = 120.0
 margin_top = 7.0
 margin_right = 422.0
-margin_bottom = 46.0
-custom_fonts/font = SubResource( 4 )
+margin_bottom = 89.0
+custom_fonts/font = SubResource( 13 )
+autowrap = true
 
 [connection signal="EnergyChanged" from="EnergyHandler" to="CanvasLayer/Label" method="_on_EnergyHandler_EnergyChanged"]
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_ResetButton_pressed"]

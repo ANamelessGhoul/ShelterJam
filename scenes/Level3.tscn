@@ -21,3 +21,6 @@ pattern = ExtResource( 2 )
 
 [node name="Flag" parent="ObstructionMap" index="3" instance=ExtResource( 12 )]
 position = Vector2( 360, 147 )
+
+[node name="TutorialText" parent="CanvasLayer" index="7"]
+text = "Can't cast if the skills don't hit on all of it's positions."

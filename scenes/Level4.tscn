@@ -28,3 +28,6 @@ pattern = ExtResource( 5 )
 
 [node name="Flag" parent="ObstructionMap" index="4" instance=ExtResource( 12 )]
 position = Vector2( 345, 98 )
+
+[node name="TutorialText" parent="CanvasLayer" index="7"]
+text = "Reminder: leaving the enhanced square does not cost energy."

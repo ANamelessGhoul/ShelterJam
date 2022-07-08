@@ -1,13 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://sprites/Flag.png" type="Texture" id=1]
 [ext_resource path="res://patterns/Level8-2FWB.tres" type="Resource" id=2]
 [ext_resource path="res://patterns/Level8-5F.tres" type="Resource" id=3]
 [ext_resource path="res://objects/Flag/Flag.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Template.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/Character/Character.tscn" type="PackedScene" id=6]
-[ext_resource path="res://objects/Flag/Flag.cs" type="Script" id=7]
-[ext_resource path="res://objects/Character/Character.cs" type="Script" id=8]
 [ext_resource path="res://patterns/Level8-2Fr1Br1Lr1R.tres" type="Resource" id=9]
 
 [node name="GameSpace" instance=ExtResource( 5 )]
@@ -21,36 +18,20 @@ tile_data = PoolIntArray( -393203, 1, 0, -393202, 1, 0, -393201, 1, 0, -393200, 
 [node name="ObstructionMap" parent="." index="7"]
 tile_data = PoolIntArray( -262131, 2, 0, -262130, 2, 0, -262129, 2, 0, -262128, 2, 0, -262127, 2, 0, -262126, 2, 0, -262125, 2, 0, -196595, 2, 0, -196594, 2, 0, -196593, 2, 0, -196592, 2, 0, -196591, 2, 0, -196590, 2, 0, -196589, 2, 0 )
 
-[node name="Flag" type="Sprite" parent="ObstructionMap" index="1" instance=ExtResource( 4 )]
+[node name="Flag" parent="ObstructionMap" index="1" instance=ExtResource( 4 )]
 position = Vector2( 330, 77 )
-texture = ExtResource( 1 )
-centered = false
-offset = Vector2( -9, -14 )
-script = ExtResource( 7 )
 
-[node name="Character" type="Node2D" parent="ObstructionMap" index="2" groups=["Character"] instance=ExtResource( 6 )]
+[node name="Character" parent="ObstructionMap" index="2" instance=ExtResource( 6 )]
 position = Vector2( 210, 91 )
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_group_": true
-}
 pattern = ExtResource( 3 )
-SkillEnergyCost = 1
 
-[node name="Character2" type="Node2D" parent="ObstructionMap" index="3" groups=["Character"] instance=ExtResource( 6 )]
+[node name="Character2" parent="ObstructionMap" index="3" instance=ExtResource( 6 )]
 position = Vector2( 255, 112 )
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_group_": true
-}
 pattern = ExtResource( 9 )
-SkillEnergyCost = 1
 
-[node name="Character3" type="Node2D" parent="ObstructionMap" index="4" groups=["Character"] instance=ExtResource( 6 )]
+[node name="Character3" parent="ObstructionMap" index="4" instance=ExtResource( 6 )]
 position = Vector2( 300, 133 )
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_group_": true
-}
 pattern = ExtResource( 2 )
-SkillEnergyCost = 1
+
+[node name="TutorialText" parent="CanvasLayer" index="7"]
+text = "One of splatters' skill breaks walls instead."
